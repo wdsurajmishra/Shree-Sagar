@@ -377,7 +377,7 @@
 
 {% endif %}
 <script>
-    const socket = new WebSocket("ws://" + window.location.host + "/ws/notifications/");
+    const socket = new WebSocket((window.location.protocol === "https:" ? "wss://" : "ws://") + window.location.host + "/ws/notifications/");
 
 socket.onmessage = function (event) {
     const data = JSON.parse(event.data);
