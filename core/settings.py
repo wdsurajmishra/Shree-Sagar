@@ -165,6 +165,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+# Allow requests from your domain
+CSRF_TRUSTED_ORIGINS = [
+    "https://tanabanaweaves.com",
+    "https://www.tanabanaweaves.com",
+]
+
+# If using HTTPS, make sure Django detects it
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
 # Default primary key field type
