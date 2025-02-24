@@ -20,8 +20,6 @@ from datetime import datetime
 # Create your views here.
 # @cache_page(60 * 15)
 def index(request):
-    user = Customer.objects.get(username="suraj")
-    login(request, user)
     sliders = Slider.objects.all().order_by('position')
     context = {
             'sliders': sliders,
