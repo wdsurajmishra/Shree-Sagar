@@ -32,7 +32,7 @@
 <script>
     $(document).ready(function() {
         
-        const socket = new WebSocket((window.location.protocol === "https:" ? "wss://" : "ws://") + window.location.host + "/ws/chat/support");
+        const socket = new WebSocket((window.location.protocol === "https:" ? "wss://" : "ws://") + window.location.host + "/ws/chat/support/");
 
         socket.onopen = function(e) {
             console.log('Connection established');
