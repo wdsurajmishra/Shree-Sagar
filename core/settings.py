@@ -169,6 +169,8 @@ USE_TZ = True
 CSRF_TRUSTED_ORIGINS = [
     "https://tanabanaweaves.com",
     "https://www.tanabanaweaves.com",
+    "http://tanabanaweaves.com",
+    "http://www.tanabanaweaves.com"
 ]
 
 # If using HTTPS, make sure Django detects it
