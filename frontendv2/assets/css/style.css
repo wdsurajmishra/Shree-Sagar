@@ -1,0 +1,261 @@
+@font-face {
+    font-family: 'Amargo';
+    src: url(../fonts/amagro/Amagro.ttf);
+}
+
+
+
+:root {
+    --grey: #606163;
+    --black: #222222;
+    --pink: #CC0D39;
+    --white: #ffffff;
+    --bg: #fff8f8;
+}
+
+body {
+    background-color: var(--bg);
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-decoration: none !important;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Amargo', sans-serif;
+}
+
+span {
+    color: var(--pink);
+    font-family: inherit;
+}
+
+.topbar {
+    background-color: var(--pink);
+}
+
+.topbar p {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: var(--white);
+}
+nav{
+    background-color: var(--bg);
+    backdrop-filter: blur(15px);
+}
+
+nav a {
+    text-transform: uppercase;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    letter-spacing: 1px;
+    color: var(--black);
+    position: relative;
+    transition: all .3s ease-in-out;
+}
+
+nav a::after {
+    content: '';
+    width: 0%;
+    left: 0;
+    top: 110%;
+    height: 1.3px;
+    background-color: var(--black);
+    position: absolute;
+    transition: all .3s ease-in-out;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+nav a:hover {
+    color: var(--black);
+}
+
+p {
+    word-spacing: 3px;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--grey);
+    border-radius: 50%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .3s ease-in-out;
+}
+.icon-box:hover {
+    background-color: var(--black);
+    border-color: var(--black);
+}
+.icon-box:hover .white-img{
+    transition: all .3s ease-in-out;
+    filter: invert(1) !important;
+}
+
+.close-icon {
+    width: 25px;
+    height: 25px;
+    transition: all .3s ease-in-out;
+}
+.close-icon:hover{
+    background-color: var(--black);
+}
+
+.close-icon:hover .white-img {
+    filter: invert(1) !important;
+}
+
+
+
+.offcanvas,
+.modal-content {
+    background-color: rgba(255, 255, 255, .8);
+    background: url(../images/backgrounds/ss-bg.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    backdrop-filter: blur(15px);
+    border: none !important;
+    transition: all .5s ease-in-out;
+}
+
+.cart-item-count {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--pink);
+    color: var(--white);
+    top: -5px;
+    right: 0;
+}
+
+
+
+.icon-box img {
+    width: 20px;
+    filter: invert(100%) brightness(0%);
+
+}
+
+.search-icon {
+    position: absolute;
+    top: 40%;
+    right: 30px;
+}
+
+.search-box input:focus {
+    border-color: var(--pink);
+    outline: var(--pink);
+}
+
+.product-card{
+    cursor: pointer;
+}
+
+.product-img-box {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    position: relative;
+    clip-path: polygon(10% 1%, 100% 0%, 87% 100%, 0% 100%);
+
+}
+
+.product-info a{
+    color: var(--pink) !important;
+    font-size: 14px;
+    text-decoration: underline !important;
+}
+
+.product-img-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+.product-img-box img:nth-child(2) {
+    transform: translateX(100%);
+}
+
+.product-card:hover img:nth-child(2) {
+    transform: translateX(0);
+}
+
+.product-card:hover img:nth-child(1) {
+    transform: translateX(-100%);
+}
+
+
+
+.product-info h6 {
+    font-family: "Poppins";
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--black);
+    letter-spacing: 1px;
+}
+
+.product-card:hover h6 {
+    text-decoration: underline !important;
+}
+
+.product-card:hover .product-info h6 {
+    color: var(--pink) !important;
+}
+
+.btn {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.video{
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+}
+
+.review-btn-fixed{
+    background-color: var(--black);
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+}
+.search-input{
+    background-color: rgba(255, 255, 255, .4) !important;
+    border: 0 !important;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(15px);
+}

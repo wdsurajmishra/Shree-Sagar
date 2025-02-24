@@ -1,0 +1,76 @@
+{% extends '../../base.html' %}
+
+{% block title %}
+    {{customer.first_name}} - Addresses | Shree Sagar
+{% endblock title %}
+    
+
+{% block content %}
+    <div class="container-fluid py-5">
+        <h1>{{customer.first_name}},s <span>Addresses</span></h1>
+        <div class="row gap-4 py-5 px-2">
+            <div class="col-md-8">
+                
+                <div class="d-flex gap-2 flex-column">
+                    {% for address in addresses %}
+                    <div class="bg-white shadow-sm rounded">
+                        <div class="p-3">
+                            <h4>{{address.full_name}}</h4>
+                            <p>{{address.address_line_1}},
+                            {{address.address_line_2}}, {{address.city}},
+                            {{address.state}}, {{address.country}}  - {{address.postal_code}}</p>
+                            <p>Phone: {{address.phone_number}}</p>
+                        </div>
+                        <div class="p-3">
+                            <a href="?update={{address.id}}" class="btn btn-dark">Update</a>
+                            <a href="{% url 'user-addresses-delete' address.id %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+                    
+            </div>
+            <div class="col-md-3 p-3 rounded border">
+                <form action="{% if request.GET.update %}
+                    {% url 'user-addresses-update' request.GET.update %}
+                {% endif %}" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="mb-2">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} <small class="text-danger">*</small>{% endif %}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in field.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button class="btn btn-dark w-100 py-3">
+                        
+                        {% if request.GET.update %}
+                        Update Address
+                        {% else %}
+                        Add Address
+                        {% endif %}
+                            
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
+{% block js %}
+    <script>
+        const inputs = document.querySelectorAll('input');  
+        inputs.forEach(input => {
+            input.classList.add('form-control');
+            // input.classList.add('py-3');
+        });
+        // Initialize Bootstrap toast
+    
+    </script>
+{% endblock js %}

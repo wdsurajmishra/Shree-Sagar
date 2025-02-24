@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shree Sagar Faishon</title>
+    <!--=========================== CSS  ===========================-->
+    <link rel="stylesheet" href="./assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!--=========================== CSS  ===========================-->
+</head>
+
+<body>
+    <!--=========================== TOPBAR  ===========================-->
+    <div class="topbar">
+        <div class="container">
+            <p class="text-center py-2 mb-0">Offer Text With Link Goes Here</p>
+        </div>
+    </div>
+    <!--=========================== TOPBAR  ===========================-->
+    <!--=========================== NAVBAR  ===========================-->
+    <nav class="d-flex justify-content-between align-items-center py-3 container-fluid sticky-top">
+        <div class="links col-md-4 d-none d-md-flex">
+            <li><a href="#">Shop All</a></li>
+            <li><a href="#">Categories</a></li>
+            <li><a href="#">Bestseller</a></li>
+        </div>
+        <div class="brand col-md-4">
+            <h6>Shree Sagar</h6>
+        </div>
+        <div class="icons d-flex gap-3 ">
+            <button class="icon-box" data-bs-toggle="offcanvas" data-bs-target="#searchCanvas">
+                <img src="./assets/images/icons/search.svg" class="white-img" alt="search shree sagar">
+            </button>
+            <button class="icon-box" data-bs-toggle="offcanvas" href="#cart">
+                <img src="./assets/images/icons/cart.svg" class="white-img" alt="search shree sagar">
+                <div class="cart-item-count">2</div>
+            </button>
+            <button class="icon-box d-md-block d-none" data-bs-toggle="offcanvas" href="#account">
+                <img src="./assets/images/icons/user.svg" class="white-img" alt="search shree sagar">
+            </button>
+            <button class="icon-box d-md-none d-block" data-bs-toggle="offcanvas" href="#menu">
+                <img src="./assets/images/icons/menu.svg" class="white-img" alt="search shree sagar">
+            </button>
+        </div>
+    </nav>
+    <!--=========================== NAVBAR  ===========================-->
+    <!--=========================== SEARCH MODAL  ===========================-->
+   
+    <div class="offcanvas offcanvas-top h-75 rounded-bottom-3" tabindex="-1" id="searchCanvas" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Search <span>Products</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="./assets/images/icons/close.svg" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="search-box postion-relative">
+                <input type="search" placeholder="Search Products" class="border search-input w-100 px-2 py-3  rounded"
+                    autofocus="true">
+            </div>
+        </div>
+    </div>
+    <!--=========================== SEARCH MODAL  ===========================-->
+    <!--=========================== CART  ===========================-->
+    <div class="offcanvas offcanvas-end rounded-start-3" tabindex="-1" id="cart" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">My <span>CART</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="./assets/images/icons/close.svg" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+
+        </div>
+    </div>
+    <!--=========================== CART  ===========================-->
+    <!--=========================== CART  ===========================-->
+    <div class="offcanvas offcanvas-end rounded-start-3" tabindex="-1" id="menu" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="./assets/images/icons/close.svg" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+            <div>
+                <li><a href="#">Shop All</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">Bestseller</a></li>
+            </div>
+            <button class="btn btn-outline-dark d-flex gap-2 w-100"><img src="./assets/images/icons/user.svg"
+                    width="20px" class="white-img" alt=""> <span>My Account</span></button>
+        </div>
+    </div>
+    <!--=========================== CART  ===========================-->
+    <!--=========================== ACCOUNT  ===========================-->
+    <div class="offcanvas offcanvas-start rounded-end-3" tabindex="-1" id="account" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">My <span>Account</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="./assets/images/icons/close.svg" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body">
+
+        </div>
+    </div>
+    <!--=========================== ACCOUNT  ===========================-->
+    <!--=========================== REWVIEW  ===========================-->
+    <div class="offcanvas offcanvas-bottom h-75 rounded-top-3" tabindex="-1" id="reviews" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Customer <span>Reviews</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="./assets/images/icons/close.svg" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body">
+
+        </div>
+    </div>
+    <!--=========================== REWVIEW  ===========================-->
+
+
+    <!--=========================== BANNER  ===========================-->
+    <div class="container-fluid py-3 ">
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner rounded">
+                <div class="carousel-item active">
+                    <img src="https://medias.utsavfashion.com/media/wysiwyg/home/2024/0512/hs-thu-gen-yes-jollygoodsalein-051224.jpg"
+                        class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://medias.utsavfashion.com/media/wysiwyg/home/2024/0512/hs-thu-gen-yes-jollygoodsalein-051224.jpg"
+                        class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://medias.utsavfashion.com/media/wysiwyg/home/2024/0512/hs-thu-gen-yes-jollygoodsalein-051224.jpg"
+                        class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!--=========================== BANNER  ===========================-->
+    <!--=========================== NEW ARRIVAL  ===========================-->
+    <div class="container-fluid py-5 overflow-hidden">
+        <h1><span>Featured</span> Products.</h1>
+        <div class="row py-3 g-5">
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+        </div>
+    </div>
+    <!--=========================== NEW ARRIVAL  ===========================-->
+    <!--=========================== PRODUCT MODAL  ===========================-->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header d-flex justify-content-between align-items-center">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Product Name</h1>
+                    <button type="button" class="icon-box close-icon" data-bs-dismiss="modal" aria-label="Close"><img
+                            src="./assets/images/icons/close.svg" class="white-img" width="15px" alt=""></button>
+                </div>
+                <div class="modal-body">
+                    Products Details
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=========================== PRODUCT MODAL  ===========================-->
+    <!--=========================== VIDEO  ===========================-->
+
+    <video src="./assets/videos/banaras2.mp4" autoplay loop muted class="video"></video>
+    <!--=========================== VIDEO  ===========================-->
+
+    <!--=========================== NEW ARRIVAL  ===========================-->
+    <div class="container-fluid py-5 overflow-hidden">
+        <h1><span>LATEST</span> Products.</h1>
+        <div class="row py-3 g-5">
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small class="review-text">24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+        </div>
+    </div>
+    <!--=========================== NEW ARRIVAL  ===========================-->
+    <!--=========================== OFFER & DEALS  ===========================-->
+    <div class="container-fluid overflow-hidden py-5">
+        <h1>Offer <span>&</span> Deals.</h1>
+        <div class="row py-5 g-5 ">
+            <div class="col-md-6 col-12">
+                <div class="placeholder-glow">
+                    Deals Banner
+                    <div class="placeholder col-12 rounded border border-dark border-5" style="height: 400px;"></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="placeholder-glow">
+                    Deals Banner
+                    <div class="placeholder col-12 rounded border border-dark border-5" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=========================== OFFER & DEALS  ===========================-->
+    <!--=========================== FESTIVE COLLECTION  ===========================-->
+    <div class="container-fluid py-5 overflow-hidden">
+        <h1><span>FESTIVE</span> COLLECTION.</h1>
+        <div class="row py-3 g-5">
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small class="review-text">24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+            <div class="col-md-3 product-card">
+                <div class="product-img-box">
+                    <img src="https://vividbynupur.com/cdn/shop/files/Untitled_Project_1.jpg?v=1727837192&width=533"
+                        class="product-img-first w-100" alt="">
+                    <img src="https://vividbynupur.com/cdn/shop/files/IMG_3676_81ee1cb1-ed51-4b8d-9018-c616e2a74f00.jpg?v=1727836178&width=533"
+                        class="product-img-first w-100" alt="">
+                </div>
+                <div class="product-info py-2 text-center">
+                    <h6>Designer Zari Organza Saree</h6>
+                    <div class="d-flex gap-3 py-1 justify-content-center">
+                        <del class="text-decoration-line-through text-muted">Rs. 4,200.00</del>
+                        <span>Rs 2,800</span>
+                    </div>
+                    <a href="#"><small>24 Reviews</small></a>
+                </div>
+                <button class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+                    Cart</button>
+            </div>
+        </div>
+    </div>
+    <!--=========================== FESTIVE COLLECTION  ===========================-->
+    <!--=========================== FIXED BUTTONs  ===========================-->
+    <button class="review-btn-fixed btn btn-dark rounded-0 shadow px-4 py-2 rounded-end-4" data-bs-target="#reviews" data-bs-toggle="offcanvas">
+       Reviews
+    </button>
+    <!--=========================== FIXED BUTTONs  ===========================-->
+
+
+
+
+    <!--=========================== SCRIPTS  ===========================-->
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendor/jquery/jquery.min.js"></script>
+    <script src="./assets/vendor/flurry/flurry.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <!--=========================== SCRIPTS  == =========================-->
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+{% extends '../base.html' %}
+
+
+{% block title %}
+    Tanabana Faqs
+{% endblock title %}
+    
+
+
+{% block content %}
+    <div class="container-fluid py-5">
+        <h1 class="text-center">FAQs</h1>
+        <div class="col-md-8 mx-auto col-10 py-3">
+            <div class="accordion accordion-flush rounded" id="accordionFlushExample">
+
+                
+                {% for faq in faqs %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ faq.id }}" aria-expanded="false" aria-controls="flush-collapse{{ faq.id }}">
+                        {{faq.question}}
+                      </button>
+                    </h2>
+                    <div id="flush-collapse{{ faq.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                      <div class="accordion-body text-muted">{{faq.answer|safe}}</div>
+                    </div>
+                  </div>
+                {% endfor %}
+                    
+            
+              </div>
+        </div>
+    </div>
+{% endblock content %}
+    

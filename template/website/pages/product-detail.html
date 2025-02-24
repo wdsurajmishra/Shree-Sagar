@@ -1,0 +1,147 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block title %}
+{{product.name}}
+{% endblock title %}
+
+
+{% block meta %}
+    
+{% endblock meta %}
+    
+
+{% block content %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb my-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{product.name}}</li>
+        </ol>
+    </nav>
+
+    <div class="row py-4">
+        <div class="col-md-4">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner rounded">
+
+                    {% if not request.GET.variant %}
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img src="{{product.thumbnail.url}}" class="d-block w-100" alt="{{product.name}}">
+                    </div>
+                    {% for variant in product.variants.all %}
+                    {% for image in variant.images.all %}
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img src="{{image.image.url}}" class="d-block w-100" alt="...">
+                    </div>
+                    {% endfor %}
+                    {% endfor %}
+                    {% else %}
+                    {% for variant in product.variants.all %}
+                    {% if variant.id|stringformat:"s" == request.GET.variant %}
+                    {% for image in variant.images.all reversed %}
+                    <!-- {{image.image.url}} -->
+                    <div class="carousel-item active" data-bs-interval="2000">
+                        <img src="{{image.image.url}}" class="d-block w-100" alt="...">
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+               
+            </div>
+            <div class="d-flex justify-content-between gap-2 align-items-center py-2">
+                <button type="button" class="c-c" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                    <i class="ti ti-chevron-left"></i>
+                </button>
+            
+             
+            
+                <button type="button" class="c-c" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                    <i class="ti ti-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>{{product.name}}</h2>
+            <div class="d-flex flex-column gap-2 py-2">
+                <del class="text-decoration-line-through text-muted">Rs. {{product.price}}</del>
+                <span class="fw-bold fs-3">Rs <span id="sellingPrice">{{product.variants.first.price}}</span></span>
+            </div>
+            <small class="text-muted border border-dark fs p-2 rounded-2"><span>Shipping</span> calculated at
+                checkout.</small>
+
+            <div class="py-4">
+                <h6>Color
+                    {% if request.GET.variant %}
+                    {% for variant in product.variants.all %}
+                    {% if variant.id|stringformat:"s" == request.GET.variant %}
+                    <span class="text-capitalize" style="color: {{variant.color}};">- {{variant.color}}</span>
+
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </h6>
+
+
+                {% for varinat in product.variants.all %}
+                <a href="?variant={{varinat.id}}"> <button class="btn rounded-circle me-2"
+                        style="background-color: {{varinat.color}}; width: 25px; height: 25px;"></button></a>
+                {% endfor %}
+
+            </div>
+            <a href="{% url 'video-call-booking' product.id %}" target="_blank" class="btn btn-dark">
+                <i class="ti ti-video"></i> Book a video call 
+            </a>
+            <div class="py-3">
+                {{product.description}}
+            </div>
+            <div class="py-4">
+                <h6>Share this product:</h6>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn btn-dark">
+                        <i class="ti ti-brand-facebook-filled"></i> Facebook
+                    </a>
+                    <a href="mailto:?subject=Check out this product&body={{ request.build_absolute_uri }}" class="btn btn-dark">
+                        <i class="ti ti-mail-filled"></i> Email
+                    </a>
+                    <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}" target="_blank" class="btn btn-dark">
+                        <i class="ti ti-brand-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="mb-4"></div>
+            {% if request.GET.variant %}
+            <button class="btn py-3 px-5 btn-dark" id="addToCart">Add To Cart</button>
+            {% else %}
+            
+            <button class="btn py-3 px-5 btn-dark"  data-bs-container="body" data-bs-toggle="popover"
+            data-bs-placement="top" data-bs-content="Please Select A Color">Add To Cart</button>
+            {% endif %}
+            <br>
+            <br>
+            <a href="https://wa.me/?text={{ request.build_absolute_uri }}" target="_blank" class="btn btn-outline-dark py-2 px-3">Consult our stylist</a>
+
+            {% if product.seller_pdf %}
+            <a href="{{product.seller_pdf.url}}" target="_blank" class="btn btn-outline-dark py-3 px-5 mt-2">PDF Catlog</a>
+            {% endif %}
+                
+        </div>
+    </div>
+    <div class="row py-5">
+        {% for product in related_products %}
+
+            {% include '../includes/product-card.html' %}
+
+        {% empty %}
+        <p>Related Product Not Found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+    

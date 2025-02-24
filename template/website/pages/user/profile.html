@@ -1,0 +1,53 @@
+{% extends '../../base.html' %}
+
+
+{% block title %}
+    {{ user.first_name }}'s Profile | Shree Sagar
+{% endblock title %}
+    
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="row py-5">
+            <div class="col-md-12">
+                <h1>Welcome, <span>{{ user.first_name }}</span></h1>
+                <p>Here you can see your profile information.</p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    
+                    {% for field in form %}
+                        <div class="mb-2">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in field.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button class="btn btn-dark w-100 py-3">Update Profile</button>
+                        
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
+
+
+{% block js %}
+    <script>
+        const inputs = document.querySelectorAll('input');  
+        inputs.forEach(input => {
+            input.classList.add('form-control');
+            input.classList.add('py-3');
+        });
+        // Initialize Bootstrap toast
+    
+    </script>
+{% endblock js %}
+    

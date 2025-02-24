@@ -1,0 +1,75 @@
+{% extends '../base.html' %}
+
+
+{% block title %}
+    Book Video Call 
+{% endblock title %}
+    
+
+
+{% block content %}
+    <div class="container-fluid py-3">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12 p-3 border rounded border-2 border-dark">
+                <h1 class="text-center">Book A Video Call</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group mb-2">
+                        <label for="name" class="form-label text-dark fw-semibold">Name <span class="text-danger">*</span></label>
+                        <input type="text" name="name" id="name" class="form-control border border-2 border-dark " required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="name" class="form-label text-dark fw-semibold">Whatsapp Number <span class="text-danger">*</span></label>
+                        <input type="text" minlength="10" maxlength="13" name="name" id="name" class="form-control border border-2 border-dark " required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="date" class="form-label text-dark fw-semibold">Date <span class="text-danger">*</span></label>
+                        <input type="date" name="date" id="date" class="form-control border border-2 border-dark " required>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="date" class="form-label text-dark fw-semibold">Availble Slots <span class="text-danger">*</span></label>
+                        <select name="slot" class="form-select border border-2 border-dark " id="">
+                        
+                        </select>
+                    </div>
+                    <button class="btn btn-dark py-2 w-100">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block js %}
+    <script>
+        const today = new Date();
+        const date = today.toISOString().split('T')[0];
+        document.getElementById('date').min = date;
+
+        $('#date').on('change', function() {
+            const selectedDate = $(this).val();
+            $.ajax({
+            url: `/get-slots?date=${selectedDate}`,
+            method: 'GET',
+            success: function(data) {
+                const slotSelect = $('select[name="slot"]');
+                slotSelect.empty();
+                if (data.status === 'success') {
+                data.available_slots.forEach(slot => {
+                    const option = $('<option></option>').val(slot).text(slot);
+                    slotSelect.append(option);
+                });
+                } else {
+                const option = $('<option></option>').val('').text('No slots available');
+                slotSelect.append(option);
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching available slots:', error);
+            }
+            });
+        });
+    </script>
+{% endblock js %}
+    
+    

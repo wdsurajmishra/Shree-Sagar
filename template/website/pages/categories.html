@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+
+{% block title %}
+Categories | Shree Sagar
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid overflow-hidden">
+    <nav aria-label="breadcrumb my-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Categories All</li>
+        </ol>
+    </nav>
+    <h1 class="py-3">Categories</h1>
+    <div class="row">
+        
+        {% for category in categories %}
+            <a class="col-md-3" href="{% url 'shop' %}?category={{category.id}}">
+                <div style="height: 300px; width: 100%; background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{{ category.thumbnail.url }}'); background-size: cover; background-position: center; border-radius: 10px;" class="d-flex justify-content-center align-items-center">
+                    <h2 class="text-white w-50 text-center mx-auto">{{category.name}}</h2>                    
+
+                </div>
+            </a>
+        {% endfor %}
+            
+    </div>
+</div>
+{% endblock content %}
+    

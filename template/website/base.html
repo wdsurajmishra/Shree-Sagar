@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+
+        {% endblock title %}
+    </title>
+    <!--=========================== CSS  ===========================-->
+    <link rel="stylesheet" href="{% static './assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static './assets/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+    {% block css %}
+
+    {% endblock css %}
+
+    <!--=========================== CSS  ===========================-->
+    <!--=========================== META TAGS  ===========================-->
+
+    {% block meta %}
+
+    {% endblock meta %}
+
+    <!--=========================== META TAGS  ===========================-->
+</head>
+
+<body>
+    <!--=========================== TOPBAR  ===========================-->
+    <div class="topbar">
+        <div class="container">
+            <p class="text-center py-2 mb-0">{{home.offer_text_with_link|safe}}</p>
+        </div>
+    </div>
+    <!--=========================== TOPBAR  ===========================-->
+    <!--=========================== NAVBAR  ===========================-->
+    <nav class="d-flex justify-content-center align-items-center py-3 container-fluid sticky-top navb">  
+        <div class="links col-md-4 d-none d-md-flex">
+            <li><a href="#" id="shopall">Shop All</a>
+                <div class="custom-dropdown-menu" id="shopall-dropdown">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="row">
+                                
+                                {% for category in categories_data %}
+                                    <div class="col-md-6 col-lg-4 col-12">
+                                        <h6>{{ category.category }}</h6>
+                                        <div class="mb-2"></div>
+                                        {% for subcategory in category.subcategories %}
+                                            <a href="{% url 'shop' %}?category={{ category.id }}&subcategory={{ subcategory.id }}" class="pt-1"><small>{{ subcategory.name }}</small></a> <br>
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                                    
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row g-5">
+                                <div class="col-md-6">
+                                    <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599" class="w-100 rounded alt="">
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599" class="w-100 rounded alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><a href="{% url 'categories' %}">Categories</a></li>
+            <li><a href="#">Bestseller</a></li>
+        </div>
+        <div class="brand col-md-4">
+            <h6 onclick="window.location.href='/'" class="cursour-pointer text-center">TanaBana</h6>
+        </div>
+        <div class="icons d-flex gap-3 align-items-center col-md-4 justify-content-end">
+            <li class="nav-item dropdown ">
+                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    About Us
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'our-story' %}">Our Story</a></li>
+                    <li><a class="dropdown-item" href="{% url 'history' %}">History</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <button class="icon-box" data-bs-toggle="offcanvas" data-bs-target="#searchCanvas">
+                <img src="{% static './assets/images/icons/search.svg' %}" class="white-img" alt="search shree sagar">
+            </button>
+            <button class="icon-box" data-bs-toggle="offcanvas" data-bs-target="#cart">
+                <img src="{% static './assets/images/icons/cart.svg' %}" class="white-img" alt="search shree sagar">
+                <div class="cart-item-count" id="cartCount">{{request.session.cart|length}}</div>
+            </button>
+            <button class="icon-box d-md-block d-none" data-bs-toggle="offcanvas" data-bs-target="#myAccount">
+                <img src="{% static './assets/images/icons/user.svg' %}" data-bs-toggle="offcanvas"
+                    data-bs-target="#myAccount" class="white-img" alt="search shree sagar">
+            </button>
+            <button class="icon-box d-md-none d-block" data-bs-toggle="offcanvas" data-bs-target="#menu">
+                <img src="{% static './assets/images/icons/menu.svg' %}" class="white-img" alt="search shree sagar">
+            </button>
+        </div>
+    </nav>
+    <!--=========================== ACCOUNT  ===========================-->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="myAccount" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">My <span>Account</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="{% static './assets/images/icons/close.svg' %}" class="white-img" width="15px"
+                    alt="close icon"></button>
+        </div>
+        <div
+            class="offcanvas-body d-flex flex-column h-100  {% if not request.user.is_authenticated %} justify-content-center {% else %} justify-content-between  {% endif %}">
+
+            {% if not request.user.is_authenticated %}
+            <form action="" method="post">
+                <h3 class="text-center">Login</h3>
+                <div class="mb-2">
+                    <input type="text" maxlength="10" class="form-control py-3" placeholder="Phone Number" name="phone">
+                </div>
+                <div class="mb-2">
+                    <input type="text" maxlength="6" class="form-control py-3" placeholder="6 Digit OTP" name="phone">
+                </div>
+                <button class="btn btn-dark py-3 w-100">Login</button>
+            </form>
+            <div class="mb-2"></div>
+            <small class="text-end text-uppercase">Create a new Account <a href="#"><span>Regsiter</span></a></small>
+
+            {% else %}
+
+            <nav class="d-flex flex-column gap-3">
+                <li><a href="{% url 'user-profile' %}" class="fs-4"><i class="ti ti-user-filled"></i> My Profile</a>
+                </li>
+                <li><a href="{% url 'user-addresses' %}" class="fs-4"><i class="ti ti-map-pin-filled"></i> Addresses</a></li>
+                <li><a href="#" class="fs-4"><i class="ti ti-brand-codesandbox"></i> Orders</a></li>
+                <li><a href="#" class="fs-4"><i class="ti ti-heart-filled"></i> Wishlist</a></li>
+            </nav>
+
+            <form action="" method="post">
+                <button class="btn btn-dark py-3 w-100"><i class="ti ti-logout"></i> Logout</button>
+            </form>
+            {% endif %}
+
+        </div>
+    </div>
+    <!--=========================== ACCOUNT  ===========================-->
+    <!--=========================== NAVBAR  ===========================-->
+
+    <!--=========================== ALERT  ===========================-->
+    <div class="container-fluid">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="toast w-100 align-items-center text-bg-dark border-0" role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div class="d-flex justify-content-between">
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+                <button class="btn"><i class="ti ti-x text-light" data-bs-dismiss="toast" aria-label="Close"></i></button>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <!--=========================== ALERT  ===========================-->
+    <!--=========================== CONTENT  ===========================-->
+    {% block content %}
+
+    {% endblock content %}
+    <!--=========================== CONTENT  ===========================-->
+
+    <!--=========================== FIXED BUTTONs  ===========================-->
+    <button class="review-btn-fixed btn btn-dark rounded-0 shadow px-4 py-2 rounded-end-4" type="button"
+        data-bs-target="#reviews" data-bs-toggle="offcanvas">
+        Reviews
+    </button>
+
+    <!--=========================== REWVIEW  ===========================-->
+    <div class="offcanvas offcanvas-bottom h-75 rounded-top-3" tabindex="-1" id="reviews"
+        aria-labelledby="offcanvasExampleLabel" aria-controls="staticBackdrop">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Customer <span>Reviews</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="{% static './assets/images/icons/close.svg' %}" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body">
+
+        </div>
+    </div>
+    <!--=========================== REWVIEW  ===========================-->
+    <!--=========================== FIXED BUTTONs  ===========================-->
+
+
+    <!--=========================== SEARCH MODAL  ===========================-->
+
+    <div class="offcanvas offcanvas-top h-75 rounded-bottom-3" tabindex="-1" id="searchCanvas"
+        aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Search <span>Products</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="{% static './assets/images/icons/close.svg' %}" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="search-box postion-relative">
+                <input type="search" id="searchInput" placeholder="Search Products"
+                    class="border search-input w-100 px-2 py-3  rounded" autofocus="true">
+            </div>
+            <div id="searchOutput" class="py-3 row px-3 gap-2">
+
+            </div>
+        </div>
+    </div>
+    <!--=========================== SEARCH MODAL  ===========================-->
+    <!--=========================== CART  ===========================-->
+    <div class="offcanvas offcanvas-end rounded-start-3" tabindex="-1" id="cart"
+        aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">My <span>CART</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="{% static './assets/images/icons/close.svg' %}" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+            <div id="items" class="h-75 overflow-y-scroll d-flex flex-column gap-2">
+
+
+
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h6>Total</h6>
+                    <h6 id="total">₹0</h6>
+                </div>
+                <button class="btn btn-dark py-3 px-4">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <!--=========================== CART  ===========================-->
+
+    <!--=========================== CART  ===========================-->
+    <div class="offcanvas offcanvas-end rounded-start-3" tabindex="-1" id="menu"
+        aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="{% static './assets/images/icons/close.svg' %}" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+            <nav>
+                <li><a href="{% url 'shop' %}">Shop All</a></li>
+                <li><a href="{% url 'categories' %}">Categories</a></li>
+                <li><a href="#">Bestseller</a></li>
+            </nav>
+            <button class="btn btn-dark d-flex align-items-center gap-2 w-100 px-2 py-3" data-bs-toggle="offcanvas" data-bs-target="#myAccount"><i class="ti ti-user"></i>
+                My Account</button>
+        </div>
+    </div>
+    <!--=========================== CART  ===========================-->
+
+    <!--=========================== FOOTER  ===========================-->
+    <div class="container-fluid py-4">
+        <hr>
+        <div class="mb-4"></div>
+        <nav class="row footer g-3">
+            <div class="col-md-3">
+                <img src="{% static './assets/images/ss_logo.png' %}" width="100px" alt="">
+                <div class="mb-2"></div>
+                <small class="text-dark">Karur Vysya Bank, D35/223, Jangambari, Laxman Pura, Varanasi,
+                    Varanasi, Uttar Pradesh, 221001</small>
+            </div>
+            <div class="col-md-3">
+                <h6>Quick Links</h6>
+                <li><a href="{% url 'shop' %}">Shop All</a></li>
+                <li><a href="{% url 'categories' %}">Categories</a></li>
+                <li><a href="#">Bestseller</a></li>
+            </div>
+            <div class="col-md-3">
+                <h6>Support</h6>
+                <li><a href="{% url 'faq' %}">FAQs</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Return Policy</a></li>
+            </div>
+            <div class="col-md-3">
+                <h6>Follow Us</h6>
+                <li><a href="#"><i class="ti ti-brand-facebook-filled"></i> Facebook</a></li>
+                <li><a href="https://www.instagram.com/ss_silkestates" target="_blank"><i class="ti ti-brand-instagram"></i> Instagram</a></li>
+                <li><a href="#"><i class="ti ti-brand-youtube"></i> Youtube</a></li>
+            </div>
+        </nav>
+    </div>
+    <!--=========================== FOOTER  ===========================-->
+    <!--=========================== COPYRIGHT  ===========================-->
+    <div class="copyright">
+        <p class="text-center text-white py-2 mb-0">© 2025 Shree Sagar | All Rights Reserved.</p>
+    </div>
+    <!--=========================== COPYRIGHT  ===========================-->
+
+
+
+
+
+    <!--=========================== SCRIPTS  ===========================-->
+
+    <script src="{% static './assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static './assets/vendor/flurry/flurry.js' %}"></script>
+    <script src="{% static './assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="{% static './assets/js/main.js' %}"></script>
+
+
+    {% block js %}
+
+    {% endblock js %}
+
+    <!--=========================== SCRIPTS  == =========================-->
+</body>
+
+</html>

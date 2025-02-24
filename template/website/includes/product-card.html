@@ -1,0 +1,55 @@
+{% load static %}
+<div class="col-md-3 product-card">
+
+    <div class="product-img-box" onclick="window.location.href='{% url 'product-detail' product.slug %}'">
+
+
+        <img src="{{product.thumbnail.url}}" class="product-img-first w-100" alt="">
+        <img src="{{product.variants.all.0.images.first.image.url}}" class="product-img-first w-100" alt="">
+    </div>
+    <div class="product-info py-2 text-center"  onclick="window.location.href='{% url 'product-detail' product.slug %}'">
+        <h6>{{product.name|truncatechars:30}}</h6>
+        <div class="d-flex gap-3 py-1 justify-content-center align-items-center">
+            <del class="text-decoration-line-through text-muted">Rs. {{product.price}}</del>
+            <span>Rs {{product.variants.first.price}}</span>
+        </div>
+        <a href="#"><small>24 Reviews</small></a>
+    </div>
+    <button class="btn btn-outline-dark w-100 mb-2">Add To Wishlist</button>
+    <button class="btn btn-dark w-100 add-to-cart" data-name="{{product.name}}" data-price="{{product.price}}" data-product-image="{{product.thumbnail.url}}" data-selling-price="{{product.variants.first.price}}" data-slug="{{product.slug}}" data-bs-toggle="modal" data-bs-target="#productModal">Add To
+        Cart</button>
+</div>
+<!--=========================== PRODUCT MODAL  ===========================-->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="icon-box close-icon" data-bs-dismiss="modal" aria-label="Close"><img
+                        src="{% static './assets/images/icons/close.svg' %}" class="white-img" width="15px"
+                        alt=""></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <img src="" id="productImage" class="product-img-first w-100 rounded-2" alt="">
+                    </div>
+                    <div class="col-md-6 align-self-center">
+                        <h2 id="productName">{{product.name}}</h2>
+                        <div class="d-flex flex-column gap-2 py-2">
+                            <del class="text-decoration-line-through text-muted">Rs. <span id="productDeletedPrice"></span></del>
+                            <span class="fw-bold fs-3">Rs <span id="sellingPrice1"></span></span>
+                        </div>
+                        <small class="text-muted border fs p-2 rounded-2"><span>Shipping</span> calculated at
+                            checkout.</small>
+                       
+                        <div class="mb-4"></div>
+                        <button class="btn py-3 px-5 btn-dark" id="viewBtn">View Details</button>
+                        <div class="mb-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--=========================== PRODUCT MODAL  ===========================-->
