@@ -38,6 +38,9 @@ $(".add-to-cart").click(function (e) {
   $("#viewBtn").attr("onclick", `window.location.href='/product/${slug}'`);
 });
 
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 $("#searchInput").keyup(function (e) {
   $("#searchOutput").text("Searching...");
 
@@ -211,4 +214,26 @@ $(document).click(function (e) {
   if (!$(e.target).closest("#shopall, #shopall-dropdown").length) {
     $("#shopall-dropdown").removeClass("show-dropdown");
   }
+});
+
+
+
+$(".add-to-wishlist").click(function (e) { 
+  e.preventDefault();
+  var id = $(this).data("id");
+  var $this = $(this);
+  $.ajax({
+    type: "POST",
+    url: "/wishlist",
+    data: { product_id: id },
+    dataType: "json",
+    success: function (response) {
+      notyf.success(response.message);
+      $this.text("Added");
+    },
+    error: function () {
+      notyf.error("Something went wrong");
+    },
+  });
+
 });

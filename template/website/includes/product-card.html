@@ -13,9 +13,15 @@
             <del class="text-decoration-line-through text-muted">Rs. {{product.price}}</del>
             <span>Rs {{product.variants.first.price}}</span>
         </div>
-        <a href="#"><small>24 Reviews</small></a>
+        <a href="#"><small>{{product.reviews.count}} Reviews</small></a>
     </div>
-    <button class="btn btn-outline-dark w-100 mb-2">Add To Wishlist</button>
+   
+   {% if request.user.is_authenticated %}
+   <button class="btn btn-outline-dark w-100 mb-2 add-to-wishlist" data-id="{{product.id}}">Add To Wishlist</button>
+   {% else %}
+<button class="btn btn-outline-dark w-100 mb-2" type="button" data-bs-toggle="popover" data-bs-title="Message" data-bs-content="Please Login.">Add To Wishlist</button>
+   {% endif %}
+    
     <button class="btn btn-dark w-100 add-to-cart" data-name="{{product.name}}" data-price="{{product.price}}" data-product-image="{{product.thumbnail.url}}" data-selling-price="{{product.variants.first.price}}" data-slug="{{product.slug}}" data-bs-toggle="modal" data-bs-target="#productModal">Add To
         Cart</button>
 </div>

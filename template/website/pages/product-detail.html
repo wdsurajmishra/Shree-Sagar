@@ -6,9 +6,34 @@
 
 
 {% block meta %}
-    
+
 {% endblock meta %}
-    
+
+
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+    .swiper {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        /* height: 400px; */
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+    }
+</style>
+{% endblock css %}
+
 
 {% block content %}
 <div class="container-fluid">
@@ -49,15 +74,15 @@
                     {% endif %}
 
                 </div>
-               
+
             </div>
             <div class="d-flex justify-content-between gap-2 align-items-center py-2">
                 <button type="button" class="c-c" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                     <i class="ti ti-chevron-left"></i>
                 </button>
-            
-             
-            
+
+
+
                 <button type="button" class="c-c" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
                     <i class="ti ti-chevron-right"></i>
                 </button>
@@ -92,7 +117,7 @@
 
             </div>
             <a href="{% url 'video-call-booking' product.id %}" target="_blank" class="btn btn-dark">
-                <i class="ti ti-video"></i> Book a video call 
+                <i class="ti ti-video"></i> Book a video call
             </a>
             <div class="py-3">
                 {{product.description}}
@@ -100,13 +125,16 @@
             <div class="py-4">
                 <h6>Share this product:</h6>
                 <div class="d-flex gap-2 flex-wrap">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="btn btn-dark">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+                        target="_blank" class="btn btn-dark">
                         <i class="ti ti-brand-facebook-filled"></i> Facebook
                     </a>
-                    <a href="mailto:?subject=Check out this product&body={{ request.build_absolute_uri }}" class="btn btn-dark">
+                    <a href="mailto:?subject=Check out this product&body={{ request.build_absolute_uri }}"
+                        class="btn btn-dark">
                         <i class="ti ti-mail-filled"></i> Email
                     </a>
-                    <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}" target="_blank" class="btn btn-dark">
+                    <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}" target="_blank"
+                        class="btn btn-dark">
                         <i class="ti ti-brand-whatsapp"></i> WhatsApp
                     </a>
                 </div>
@@ -115,33 +143,136 @@
             {% if request.GET.variant %}
             <button class="btn py-3 px-5 btn-dark" id="addToCart">Add To Cart</button>
             {% else %}
-            
-            <button class="btn py-3 px-5 btn-dark"  data-bs-container="body" data-bs-toggle="popover"
-            data-bs-placement="top" data-bs-content="Please Select A Color">Add To Cart</button>
+
+            <button class="btn py-3 px-5 btn-dark" data-bs-container="body" data-bs-toggle="popover"
+                data-bs-placement="top" data-bs-content="Please Select A Color">Add To Cart</button>
             {% endif %}
             <br>
             <br>
-            <a href="https://wa.me/?text={{ request.build_absolute_uri }}" target="_blank" class="btn btn-outline-dark py-2 px-3">Consult our stylist</a>
+            <a href="https://wa.me/?text={{ request.build_absolute_uri }}" target="_blank"
+                class="btn btn-outline-dark py-2 px-3">Consult our stylist</a>
 
             {% if product.seller_pdf %}
-            <a href="{{product.seller_pdf.url}}" target="_blank" class="btn btn-outline-dark py-3 px-5 mt-2">PDF Catlog</a>
+            <a href="{{product.seller_pdf.url}}" target="_blank" class="btn btn-outline-dark py-3 px-5 mt-2">PDF
+                Catlog</a>
             {% endif %}
-                
+
         </div>
     </div>
+
+    <div class="py-5">
+        <h1 class="text-center">Customer Reviews</h1>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide ">
+                    <div class="bg-white p-2 shadow rounded">
+
+                        <img src="/media/category_thumbnails/WhatsAppImage2024-09-04at1.35.58PM_1.webp" style="width: 284px; height: 284px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <div class="d-flex gap-2 pt-2 justify-content-between">
+                            <h6>Suraj Mishra</h6>
+                            <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
+                                style="width: 16px !important; height: 16px !important;" alt="">
+                        </div>
+                        <div class="d-flex py-2">
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star text-warning"></i>
+                        </div>
+                        <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi numquam molestias
+                            veritatis earum soluta, aut eligendi quasi quo accusamus ...</small>
+                        <div class="mb-2"></div>
+                    </div>
+                </div>
+                <div class="swiper-slide ">
+                    <div class="bg-white p-2 shadow rounded">
+
+                        <img src="/media/category_thumbnails/WhatsApp_Image_2024-10-01_at_6.11.34_PM.webp" style="width: 284px; height: 284px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <div class="d-flex gap-2 pt-2 justify-content-between">
+                            <h6>Suraj Mishra</h6>
+                            <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
+                                style="width: 16px !important; height: 16px !important;" alt="">
+                        </div>
+                        <div class="d-flex py-2">
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star text-warning"></i>
+                        </div>
+                        <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi numquam molestias
+                            veritatis earum soluta, aut eligendi quasi quo accusamus ...</small>
+                        <div class="mb-2"></div>
+                    </div>
+                </div>
+                <div class="swiper-slide ">
+                    <div class="bg-white p-2 shadow rounded">
+
+                        <img src="/media/product_images/WhatsApp_Image_2024-10-01_at_6.09.10_PM.webp" style="width: 284px; height: 284px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <div class="d-flex gap-2 pt-2 justify-content-between">
+                            <h6>Suraj Mishra</h6>
+                            <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
+                                style="width: 16px !important; height: 16px !important;" alt="">
+                        </div>
+                        <div class="d-flex py-2">
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star-filled text-warning"></i>
+                            <i class="ti ti-star text-warning"></i>
+                        </div>
+                        <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi numquam molestias
+                            veritatis earum soluta, aut eligendi quasi quo accusamus ...</small>
+                        <div class="mb-2"></div>
+                    </div>
+                </div>
+              
+               
+            </div>
+
+        </div>
+
+    </div>
+
+    <h1>Related Products</h1>
     <div class="row py-5">
         {% for product in related_products %}
 
-            {% include '../includes/product-card.html' %}
+        {% include '../includes/product-card.html' %}
 
         {% empty %}
         <p>Related Product Not Found.</p>
         {% endfor %}
     </div>
 </div>
+
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+</script>
 {% endblock content %}
-
-
-
-
-    

@@ -12,6 +12,7 @@ urlpatterns = [
     path('our-story', views.our_story, name='our-story'),
     path('contact-us', views.contact, name='contact'),
     path('history', views.history, name='history'),
+    path('wishlist', views.whishlist, name='wishlist'),
     path('product/<slug>', views.product, name='product-detail'),
     path('book-a-video-call/<id>', views.videoCallBooking, name='video-call-booking'),
     path('get-slots', views.available_slots, name='available-slots'),

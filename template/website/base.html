@@ -128,7 +128,7 @@
                 </li>
                 <li><a href="{% url 'user-addresses' %}" class="fs-4"><i class="ti ti-map-pin-filled"></i> Addresses</a></li>
                 <li><a href="#" class="fs-4"><i class="ti ti-brand-codesandbox"></i> Orders</a></li>
-                <li><a href="#" class="fs-4"><i class="ti ti-heart-filled"></i> Wishlist</a></li>
+                <li><a href="{% url 'wishlist' %}" class="fs-4"><i class="ti ti-heart-filled"></i> Wishlist</a></li>
             </nav>
 
             <form action="{% url 'logout' %}" method="post">
@@ -270,6 +270,7 @@
                 <li><a href="{% url 'shop' %}">Shop All</a></li>
                 <li><a href="{% url 'categories' %}">Categories</a></li>
                 <li><a href="{% url 'bestseller' %}">Bestseller</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
             </div>
             <div class="col-md-3">
                 <h6>Support</h6>

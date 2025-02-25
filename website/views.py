@@ -16,6 +16,7 @@ from .models import Slider, VideoCallBooking, Faq
 from django.views.generic import CreateView
 from django import forms
 from datetime import datetime
+from accounts.models import WishList
 
 # Create your views here.
 # @cache_page(60 * 15)
@@ -296,3 +297,18 @@ def bestseller(request):
         'products': products,
     }
     return render(request, 'website/pages/bestseller.html', context)
+
+@csrf_exempt
+@login_required
+def whishlist(request):
+    lists = WishList.objects.filter(user=request.user)
+    if request.method == 'POST':
+        user = Customer.objects.get(phone=request.user)
+        product_id = request.POST.get('product_id')
+        WishList.objects.get_or_create(user=user, product_id=product_id)
+        return JsonResponse({'status': 'success', 'message': 'Product added to wishlist'})
+    
+    context = {
+        'lists': lists,
+    }
+    return render(request, 'website/pages/wishlist.html', context)

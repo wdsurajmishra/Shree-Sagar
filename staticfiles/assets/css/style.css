@@ -16,7 +16,6 @@
 
 body {
     background-color: var(--bg);
-    background: url(../images/backgrounds/ss-bg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -215,8 +214,6 @@ p {
 
 .offcanvas,
 .modal-content {
-    background-color: rgba(255, 255, 255, .8);
-    background: url(../images/backgrounds/ss-bg.jpg);
     background-size: cover;
     background-attachment: fixed;
     background-position: center center;

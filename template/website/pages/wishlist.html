@@ -1,0 +1,33 @@
+{% extends '../base.html' %}
+
+
+{% block title %}
+User Wishlist
+{% endblock title %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb my-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+        </ol>
+    </nav>
+    <h1>Wishlist</h1>
+
+    <div class="row">
+        {% for item in lists %}
+        <div class="bg-white shadow-sm rounded p-2 col-md-4 d-flex gap-3 m-2">
+            <img src="{{item.product.thumbnail.url}}" width="80px" alt="">
+            <div class="align-self-center">
+                <h6>{{item.product.name}}</h6>
+                <p><span>Rs. {{item.product.price}}</span></p>
+                <a href="/product/${element.slug}" class="btn btn-sm btn-dark">View</a>
+            </div>
+        </div>
+        {% endfor %}
+    
+    </div>
+</div>
+{% endblock content %}
