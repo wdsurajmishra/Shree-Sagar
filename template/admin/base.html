@@ -385,7 +385,7 @@ socket.onmessage = function (event) {
     notifications.innerHTML += "<li><a class='dropdown-item' href='#'>" + data.message + "</a></li>";
     // alert("Notification: " + data.message);
     document.getElementById("notificationCount").innerText = parseInt(document.getElementById("notificationCount").innerText) + 1;
-    const audio = new Audio('/static/sound/noti-2.wav');
+    const audio = new Audio('/static/assets/sound/noti-2.wav');
         audio.play();
 };
 
