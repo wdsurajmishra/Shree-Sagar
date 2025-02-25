@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('send_notication/',place_order),
     path('accounts/', include('accounts.urls')),
+    path('page/', include('django.contrib.flatpages.urls')),
     path('', include('website.urls')),
 
 ]

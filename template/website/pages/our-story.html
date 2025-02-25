@@ -5,9 +5,24 @@
     Our Story | TanaBana
 {% endblock title %}
     
-
+{% load static %}
 
 {% block content %}
-    
+    <div class="container-fluid py-5">
+        <div class="row">
+            <div class="col-md-6 py-3">
+                <img src="{% static 'assets/images/history/our-story.webp' %}" class="w-100 rounded" alt="">
+            </div>
+            <div class="col-md-6 py-3">
+                <h1>Our Story</h1>
+                <p>Step into the world of timeless elegance with Tana Bana, where tradition meets luxury. We bring you the finest Banarasi silk sarees, crafted with intricate artistry and woven with generations of heritage. Each saree is a masterpiece, reflecting the rich legacy of <b>Banaras’ weaving tradition</b>.
+                </p>
+                <p>Discover our exquisite collection of authentic handwoven Banarasi sarees, adorned with delicate <b>zari work, intricate motifs, and premium silk</b>. Whether it’s for a wedding, a festive celebration, or an heirloom-worthy addition to your wardrobe, Tana Bana offers you the finest craftsmanship, delivered right to your doorstep.
+                </p>
+                <p><b>✨ Experience the magic of Banaras, one weave at a time! ✨</b></p>
+                <a href="{% url 'shop' %}" class="btn btn-dark px-4 py-2">View Products</a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
     

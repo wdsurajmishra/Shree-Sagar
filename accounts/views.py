@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, View, UpdateView
 from accounts.models import Customer
 from django.http import JsonResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -27,13 +27,30 @@ class LoginView(TemplateView):
 
     def post(self, request):
         phone = request.POST.get('phone')
-        otp = request.POST.get('otp')
-        user = Customer.objects.get(phone=phone)
-        if user.is_otp_valid(otp):
+        password = request.POST.get('password')
+        user, created = Customer.objects.get_or_create(phone=phone)
+        if created:
+            user.username = phone
+            user.set_password(password)
+            user.save()
             login(request, user)
-            return JsonResponse({'status': 'success', 'message': 'Login successful'})
+            return redirect('/user/profile')
+
+        user = authenticate(request, username=phone, password=password)
+        if user is not None:  
+            login(request, user)
+            next_url = request.POST.get('next', '/user/profile')
+            return redirect(next_url)
+        else:
+            return render(request, self.template_name, {'message': 'Invalid credentials'})
         
-        return JsonResponse({'status': 'error', 'message': 'Invalid OTP'})
+
+
+        # if user.is_otp_valid(otp):
+        #     login(request, user)
+        #     return JsonResponse({'status': 'success', 'message': 'Login successful'})
+        
+        # return JsonResponse({'status': 'error', 'message': 'Invalid OTP'})
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
@@ -67,3 +84,8 @@ class WishlistView(LoginRequiredMixin, TemplateView):
         product_id = request.POST.get('product_id')
         user.wishlist.add(product_id)
         return render(request, self.template_name, {'user': user, 'message': 'Product added to wishlist'})
+
+class LogoutView(View):
+    def post(self, request):
+        logout(request)
+        return redirect('/accounts/login')

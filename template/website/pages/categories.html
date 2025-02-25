@@ -17,7 +17,7 @@ Categories | Shree Sagar
         
         {% for category in categories %}
             <a class="col-md-3" href="{% url 'shop' %}?category={{category.id}}">
-                <div style="height: 300px; width: 100%; background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{{ category.thumbnail.url }}'); background-size: cover; background-position: center; border-radius: 10px;" class="d-flex justify-content-center align-items-center">
+                <div style="height: 300px; width: 100%; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('{{ category.thumbnail.url }}'); background-size: cover; background-position: center; border-radius: 10px;" class="d-flex justify-content-center align-items-center">
                     <h2 class="text-white w-50 text-center mx-auto">{{category.name}}</h2>                    
 
                 </div>

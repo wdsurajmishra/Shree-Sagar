@@ -283,3 +283,16 @@ def contact(request):
     form = ContactForm()
     context = {'form': form}
     return render(request, 'website/pages/contact.html', context)    
+
+
+def bestseller(request):
+    products = Product.objects.prefetch_related(
+        Prefetch(
+            'variants', queryset=ProductVariant.objects.select_related('discount')),
+        Prefetch(
+            'reviews', queryset=ProductReview.objects.select_related('user'))
+    ).select_related('category', 'subcategory').order_by('-created_at')[:12]
+    context = {
+        'products': products,
+    }
+    return render(request, 'website/pages/bestseller.html', context)

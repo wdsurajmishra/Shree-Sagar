@@ -1,0 +1,27 @@
+{% extends '../base.html' %}
+
+
+{% block title %}
+    Bestseller | Shree Sagar
+{% endblock title %}
+    
+
+{% block content %}
+    <div class="container-fluid py-2">
+        <nav aria-label="breadcrumb my-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Bestseller</li>
+            </ol>
+        </nav>
+        <h1>Bestseller</h1>
+        <div class="row g-3 py-3">
+            {% for product in products %}
+            {% include '../includes/product-card-2.html' %}
+            {% empty %}
+            <p>No products found for the selected filters.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+    

@@ -10,7 +10,7 @@ from PIL import Image, ExifTags
 from io import BytesIO
 from django.core.files.base import ContentFile
 
-
+from django.contrib.auth.hashers import make_password
 
 
 def correct_image_orientation(image_field, original_name):
@@ -113,6 +113,7 @@ class Customer(User):
 
     def generate_otp(self):
         import random
+
         self.otp = str(random.randint(100000, 999999))
         self.otp_created_at = timezone.now()
         self.save()
@@ -123,6 +124,8 @@ class Customer(User):
         return False
     
     def save(self, *args, **kwargs):
+        if self.pk is None or not Customer.objects.filter(pk=self.pk, password=self.password).exists():
+            self.password = make_password(self.password)
         if self.profile_picture:
             # Correct the orientation of the image
             self.profile_picture = correct_image_orientation(self.profile_picture, self.profile_picture.name)

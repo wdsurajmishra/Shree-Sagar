@@ -12,35 +12,41 @@ Contact | TanaBana
         <div class="row">
             <div class="col-md-6">
                 <h1>Contact Us</h1>
+                <small>If you have any questions, feel free to reach out to us using the form below.</small>
+                <h6 class="py-3 fw-semibold">
+                    Visit Our Store
+                </h6>
+                <address>
+                    <small>Karur Vysya Bank, D35/223, Jangambari, Laxman Pura, Varanasi, Varanasi, Uttar Pradesh, 221001</small>
+                </address>
+                <h6 class="py-3 fw-semibold">
+                    Follow Us On
+                </h6>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="#" class="btn btn-sm btn-dark px-3">Facebook</a>
+                    <a href="#" class="btn btn-sm btn-dark px-3">Instagram</a>
+                    <a href="#" class="btn btn-sm btn-dark px-3">Youtube</a>
+                </div>
             </div>
             <div class="col-md-6">
-                <form action="" method="post">
-                    {% csrf_token %}    
-                    
-                    {% for field in form %}
-                        <div class="mb-2">
-                            {{field.label_tag}}
-                            {{field}}
-                            {% if field.help_text %}
-                                <small class="text-muted">{{field.help_text}}</small>
-                            {% endif %}
-                            {% for error in field.errors %}
-                                <small style="color: red;">{{error}}</small>
-                            {% endfor %}
-                        </div>
-                    {% endfor %}
-                        
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <form action="" method="post" class="bg-white shadow-sm rounded p-4">
+                    <div class="form-group mb-2">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" name="name" id="name" class="form-control"> 
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="name" class="form-label">Phone</label>
+                        <input type="tel" name="phone" id="name" class="form-control"> 
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="name" class="form-label">Message</label>
+                        <textarea name="" class="form-control" id=""></textarea>
+                    </div>
+                    <button class="btn btn-dark py-3 w-100">Submit</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <script>
-        const inputs = document.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            input.classList.add('form-control');
-        });
-    </script>
 {% endblock content %}
     

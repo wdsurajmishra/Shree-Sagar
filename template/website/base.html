@@ -40,7 +40,7 @@
     </div>
     <!--=========================== TOPBAR  ===========================-->
     <!--=========================== NAVBAR  ===========================-->
-    <nav class="d-flex justify-content-center align-items-center py-3 container-fluid sticky-top navb">  
+    <nav class="d-flex justify-content-between align-items-center py-3 container-fluid sticky-top navb">  
         <div class="links col-md-4 d-none d-md-flex">
             <li><a href="#" id="shopall">Shop All</a>
                 <div class="custom-dropdown-menu" id="shopall-dropdown">
@@ -53,7 +53,7 @@
                                         <h6>{{ category.category }}</h6>
                                         <div class="mb-2"></div>
                                         {% for subcategory in category.subcategories %}
-                                            <a href="{% url 'shop' %}?category={{ category.id }}&subcategory={{ subcategory.id }}" class="pt-1"><small>{{ subcategory.name }}</small></a> <br>
+                                            <a href="{% url 'shop' %}?category={{ subcategory.category.id }}&subcategory={{ subcategory.id }}" class="pt-1"><small>{{ subcategory.name }}</small></a> <br>
                                         {% endfor %}
                                     </div>
                                 {% endfor %}
@@ -63,7 +63,7 @@
                         <div class="col-md-4">
                             <div class="row g-5">
                                 <div class="col-md-6">
-                                    <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599" class="w-100 rounded alt="">
+                                    <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599" class="w-100 rounded" alt="">
                                 </div>
                                 <div class="col-md-6">
                                     <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599" class="w-100 rounded alt="">
@@ -74,13 +74,13 @@
                 </div>
             </li>
             <li><a href="{% url 'categories' %}">Categories</a></li>
-            <li><a href="#">Bestseller</a></li>
+            <li><a href="{% url 'bestseller' %}">Bestseller</a></li>
         </div>
-        <div class="brand col-md-4">
-            <h6 onclick="window.location.href='/'" class="cursour-pointer text-center">TanaBana</h6>
+        <div class="brand col-6 col-md-4 text-start text-md-center">
+            <h6 onclick="window.location.href='/'" class="cursour-pointer">TanaBana</h6>
         </div>
         <div class="icons d-flex gap-3 align-items-center col-md-4 justify-content-end">
-            <li class="nav-item dropdown ">
+            <li class="nav-item dropdown d-md-block d-none">
                 <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     About Us
                 </a>
@@ -89,7 +89,7 @@
                     <li><a class="dropdown-item" href="{% url 'history' %}">History</a></li>
                 </ul>
             </li>
-            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li class="d-md-block d-none"><a href="{% url 'contact' %}">Contact Us</a></li>
             <button class="icon-box" data-bs-toggle="offcanvas" data-bs-target="#searchCanvas">
                 <img src="{% static './assets/images/icons/search.svg' %}" class="white-img" alt="search shree sagar">
             </button>
@@ -118,19 +118,9 @@
             class="offcanvas-body d-flex flex-column h-100  {% if not request.user.is_authenticated %} justify-content-center {% else %} justify-content-between  {% endif %}">
 
             {% if not request.user.is_authenticated %}
-            <form action="" method="post">
-                <h3 class="text-center">Login</h3>
-                <div class="mb-2">
-                    <input type="text" maxlength="10" class="form-control py-3" placeholder="Phone Number" name="phone">
-                </div>
-                <div class="mb-2">
-                    <input type="text" maxlength="6" class="form-control py-3" placeholder="6 Digit OTP" name="phone">
-                </div>
-                <button class="btn btn-dark py-3 w-100">Login</button>
-            </form>
+            <small class="text-center">Please log in to access your account.</small>
             <div class="mb-2"></div>
-            <small class="text-end text-uppercase">Create a new Account <a href="#"><span>Regsiter</span></a></small>
-
+            <a href="{% url 'login' %}" class="btn btn-dark">Login</a>
             {% else %}
 
             <nav class="d-flex flex-column gap-3">
@@ -141,7 +131,8 @@
                 <li><a href="#" class="fs-4"><i class="ti ti-heart-filled"></i> Wishlist</a></li>
             </nav>
 
-            <form action="" method="post">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
                 <button class="btn btn-dark py-3 w-100"><i class="ti ti-logout"></i> Logout</button>
             </form>
             {% endif %}
@@ -253,7 +244,9 @@
             <nav>
                 <li><a href="{% url 'shop' %}">Shop All</a></li>
                 <li><a href="{% url 'categories' %}">Categories</a></li>
-                <li><a href="#">Bestseller</a></li>
+                <li><a href="{% url 'bestseller' %}">Bestseller</a></li>
+                <li><a href="{% url 'our-story' %}">Our Story</a></li>
+                <li><a href="{% url 'history' %}">History</a></li>
             </nav>
             <button class="btn btn-dark d-flex align-items-center gap-2 w-100 px-2 py-3" data-bs-toggle="offcanvas" data-bs-target="#myAccount"><i class="ti ti-user"></i>
                 My Account</button>
@@ -276,14 +269,14 @@
                 <h6>Quick Links</h6>
                 <li><a href="{% url 'shop' %}">Shop All</a></li>
                 <li><a href="{% url 'categories' %}">Categories</a></li>
-                <li><a href="#">Bestseller</a></li>
+                <li><a href="{% url 'bestseller' %}">Bestseller</a></li>
             </div>
             <div class="col-md-3">
                 <h6>Support</h6>
                 <li><a href="{% url 'faq' %}">FAQs</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Return Policy</a></li>
+                <li><a href="/page/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="/page/term-and-conditions/">Terms & Conditions</a></li>
+                <li><a href="/page/return-and-refund-policy/">Return & Refund Policy</a></li>
             </div>
             <div class="col-md-3">
                 <h6>Follow Us</h6>
