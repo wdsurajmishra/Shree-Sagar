@@ -78,6 +78,8 @@ span {
 nav{
     /* background-color: rgba(255, 255, 255, .4); */
     backdrop-filter: blur(15px);
+}
+.navb{
     border-bottom: 1px solid var(--grey);
 }
 
@@ -204,7 +206,7 @@ p {
 .breadcrumb-item a{
     text-transform: capitalize !important;
 }
-.breadcrumb {
+nav.breadcrumb {
     border: none !important;
 }
 
@@ -466,5 +468,12 @@ input:focus, textarea:focus, select:focus {
 }
 
 .dropdown li a.active{
-    background-color: var(--pink) !important;
+    color: var(--pink) !important;
+}
+.dropdown li a:focus{
+    color: var(--pink) !important;
+    background: transparent !important;
+}
+.dropdown li a{
+    font-size: 13px !important;
 }
