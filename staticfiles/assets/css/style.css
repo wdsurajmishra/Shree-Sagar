@@ -78,6 +78,7 @@ span {
 nav{
     /* background-color: rgba(255, 255, 255, .4); */
     backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--pink);
 }
 
 nav a {
@@ -161,6 +162,10 @@ nav a:hover {
     color: var(--pink);
 }
 
+.links li a.active{
+    color: var(--pink) !important;
+}
+
 p {
     word-spacing: 3px;
 }
@@ -195,6 +200,9 @@ p {
 .icon-box:hover .white-img{
     transition: all .3s ease-in-out;
     filter: invert(1) !important;
+}
+.breadcrumb-item a{
+    text-transform: capitalize !important;
 }
 
 .close-icon {
@@ -257,6 +265,16 @@ p {
     outline: var(--pink);
 }
 
+input:focus, textarea:focus, select:focus {
+    border-color: var(--pink) !important;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.04) !important;
+}
+.form-check-input:checked {
+    background-color: var(--pink) !important;
+    border: #9D7B4E;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.04);
+}
+
 .product-card{
     cursor: pointer;
 }
@@ -303,7 +321,7 @@ p {
 
 
 .product-info h6 {
-    font-weight: 500;
+    font-weight: 400;
     color: var(--black);
     letter-spacing: .5px;
 }
@@ -428,7 +446,9 @@ p {
     background: var(--pink)
 }
 
-
+.footer{
+    border: none;
+}
 .footer li {
     padding-top: 10px;
 }
@@ -440,4 +460,8 @@ p {
     width: 100%;
     height: 70vh;
     background-position: center center;
+}
+
+.dropdown li a.active{
+    background-color: var(--pink) !important;
 }
