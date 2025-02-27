@@ -23,8 +23,8 @@
     .swiper-slide {
         background-position: center;
         background-size: cover;
-        width: 300px;
-        /* height: 400px; */
+        width: 100%;
+        max-width: 300px;
     }
 
     .swiper-slide img {
@@ -167,7 +167,7 @@
                 <div class="swiper-slide ">
                     <div class="bg-white p-2 shadow rounded">
 
-                        <img src="/media/category_thumbnails/WhatsAppImage2024-09-04at1.35.58PM_1.webp" style="width: 284px; height: 284px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <img src="/media/category_thumbnails/WhatsAppImage2024-09-04at1.35.58PM_1.webp" style="width: 284px; height: 230px; object-fit: cover; object-position: top center;" class="rounded w-100" />
                         <div class="d-flex gap-2 pt-2 justify-content-between">
                             <h6>Suraj Mishra</h6>
                             <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
@@ -188,7 +188,7 @@
                 <div class="swiper-slide ">
                     <div class="bg-white p-2 shadow rounded">
 
-                        <img src="/media/category_thumbnails/WhatsApp_Image_2024-10-01_at_6.11.34_PM.webp" style="width: 284px; height: 284px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <img src="/media/category_thumbnails/WhatsApp_Image_2024-10-01_at_6.11.34_PM.webp" style="width: 284px; height: 230px; object-fit: cover; object-position: top center;" class="rounded w-100" />
                         <div class="d-flex gap-2 pt-2 justify-content-between">
                             <h6>Suraj Mishra</h6>
                             <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
@@ -209,7 +209,7 @@
                 <div class="swiper-slide ">
                     <div class="bg-white p-2 shadow rounded">
 
-                        <img src="/media/product_images/WhatsApp_Image_2024-10-01_at_6.09.10_PM.webp" style="width: 284px; height: 284px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <img src="/media/product_images/WhatsApp_Image_2024-10-01_at_6.09.10_PM.webp" style="width: 284px; height: 230px; object-fit: cover; object-position: top center;" class="rounded w-100" />
                         <div class="d-flex gap-2 pt-2 justify-content-between">
                             <h6>Suraj Mishra</h6>
                             <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
@@ -254,10 +254,12 @@
 <!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".mySwiper", {
-        effect: "coverflow",
+        // effect: "coverflow",
+        spaceBetween: 30,
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: "auto",
+        loop: true,
         coverflowEffect: {
             rotate: 50,
             stretch: 0,
@@ -265,14 +267,14 @@
             modifier: 1,
             slideShadows: true,
         },
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
+        // autoplay: {
+        //     delay: 2500,
+        //     disableOnInteraction: false,
+        // },
         pagination: {
             el: ".swiper-pagination",
             clickable: true,
         },
-    });
+        });
 </script>
 {% endblock content %}
