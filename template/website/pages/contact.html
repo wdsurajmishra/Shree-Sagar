@@ -6,6 +6,10 @@ Contact | TanaBana
 {% endblock title %}
     
 
+{% block contactactive %}
+    active
+{% endblock contactactive %}
+    
 
 {% block content %}
     <div class="container-fluid py-5">
@@ -23,27 +27,39 @@ Contact | TanaBana
                     Follow Us On
                 </h6>
                 <div class="d-flex gap-3 flex-wrap">
-                    <a href="#" class="btn btn-sm btn-dark px-3">Facebook</a>
-                    <a href="#" class="btn btn-sm btn-dark px-3">Instagram</a>
-                    <a href="#" class="btn btn-sm btn-dark px-3">Youtube</a>
+                    <a href="#" class="btn btn-sm btn-dark px-3"><t class="ti ti-brand-facebook-filled"></t></a>
+                    <a href="#" class="btn btn-sm btn-dark px-3"><i class="ti ti-brand-instagram"></i></a>
+                    <a href="#" class="btn btn-sm btn-dark px-3"><i class="ti ti-brand-youtube"></i></a>
                 </div>
             </div>
             <div class="col-md-6">
-                <form action="" method="post" class="bg-white shadow-sm rounded p-4">
+                <form id="contactForm" class="bg-white shadow-sm rounded p-4">
                     <div class="form-group mb-2">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" name="name" id="name" class="form-control"> 
                     </div>
                     <div class="form-group mb-2">
-                        <label for="name" class="form-label">Phone</label>
-                        <input type="tel" name="phone" id="name" class="form-control"> 
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="tel" name="phone" id="phone" class="form-control"> 
                     </div>
                     <div class="form-group mb-2">
-                        <label for="name" class="form-label">Message</label>
-                        <textarea name="" class="form-control" id=""></textarea>
+                        <label for="message" class="form-label">Message</label>
+                        <textarea name="message" class="form-control" id="message"></textarea>
                     </div>
-                    <button class="btn btn-dark py-3 w-100">Submit</button>
+                    <button type="button" class="btn btn-dark py-3 w-100" onclick="sendToWhatsApp()">Submit</button>
                 </form>
+
+                <script>
+                    function sendToWhatsApp() {
+                        var name = document.getElementById('name').value;
+                        var phone = document.getElementById('phone').value;
+                        var message = document.getElementById('message').value;
+                        var whatsappNumber = '000000000';
+
+                        var url = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=Name: ${name}%0APhone: ${phone}%0AMessage: ${message}`;
+                        window.open(url, '_blank');
+                    }
+                </script>
             </div>
         </div>
     </div>

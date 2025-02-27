@@ -42,7 +42,7 @@
     <!--=========================== NAVBAR  ===========================-->
     <nav class="d-flex justify-content-between align-items-center py-3 container-fluid sticky-top navb">  
         <div class="links col-md-4 d-none d-md-flex">
-            <li><a href="#" id="shopall">Shop All</a>
+            <li><a href="#" id="shopall" class="{% block shopactive %}{% endblock shopactive %}">Shop All</a>
                 <div class="custom-dropdown-menu" id="shopall-dropdown">
                     <div class="row">
                         <div class="col-md-8">
@@ -73,8 +73,16 @@
                     </div>
                 </div>
             </li>
-            <li><a href="{% url 'categories' %}">Categories</a></li>
-            <li><a href="{% url 'bestseller' %}">Bestseller</a></li>
+            <li><a href="{% url 'categories' %}" class="
+            {% block categoriesactive %}
+                
+            {% endblock categoriesactive %}
+                ">Categories</a></li>
+            <li><a href="{% url 'bestseller' %}" class="
+            {% block bestselleractive %}
+                
+            {% endblock bestselleractive %}
+                ">Bestseller</a></li>
         </div>
         <div class="brand col-6 col-md-4 text-start text-md-center">
             <h6 onclick="window.location.href='/'" class="cursour-pointer">TanaBana</h6>
@@ -85,11 +93,19 @@
                     About Us
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{% url 'our-story' %}">Our Story</a></li>
-                    <li><a class="dropdown-item" href="{% url 'history' %}">History</a></li>
+                    <li><a class="dropdown-item 
+                    {% block ourstoryactive %}
+                        
+                    {% endblock ourstoryactive %}
+                        " href="{% url 'our-story' %}">Our Story</a></li>
+                    <li><a class="dropdown-item 
+                    {% block historyactive %}
+                        
+                    {% endblock historyactive %}
+                        " href="{% url 'history' %}">History</a></li>
                 </ul>
             </li>
-            <li class="d-md-block d-none"><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li class="d-md-block d-none contact"><a href="{% url 'contact' %}" class="{% block contactactive %}{% endblock contactactive %}">Contact Us</a></li>
             <button class="icon-box" data-bs-toggle="offcanvas" data-bs-target="#searchCanvas">
                 <img src="{% static './assets/images/icons/search.svg' %}" class="white-img" alt="search shree sagar">
             </button>

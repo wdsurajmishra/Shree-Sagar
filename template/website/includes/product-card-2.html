@@ -1,7 +1,7 @@
 {% load static %}
 <div class="col-md-3 product-card py-2">
 
-    <div class="product-img-box" style="clip-path: none !important;" onclick="window.location.href='{% url 'product-detail' product.slug %}'">
+    <div class="product-img-box" style="clip-path: none !important; height: 290px;" onclick="window.location.href='{% url 'product-detail' product.slug %}'">
 
 
         <img src="{{product.thumbnail.url}}" class="product-img-first w-100" alt="">
