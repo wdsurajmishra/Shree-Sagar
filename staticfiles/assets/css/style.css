@@ -204,6 +204,9 @@ p {
 .breadcrumb-item a{
     text-transform: capitalize !important;
 }
+.breadcrumb {
+    border: none !important;
+}
 
 .close-icon {
     width: 25px;
