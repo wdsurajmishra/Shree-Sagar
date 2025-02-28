@@ -80,7 +80,7 @@ nav{
     backdrop-filter: blur(15px);
 }
 .navb{
-    border-bottom: 1px solid var(--grey);
+    border-bottom: 1px solid var(--pink);
 }
 
 nav a {

@@ -80,7 +80,7 @@ nav{
     backdrop-filter: blur(15px);
 }
 .navb{
-    border-bottom: 1px solid var(--grey);
+    border-bottom: 1px solid var(--pink);
 }
 nav a {
     text-transform: uppercase;
@@ -448,7 +448,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .footer{
-    border: none;
+    border-top: 1px solid var(--pink);
 }
 .footer li {
     padding-top: 10px;
