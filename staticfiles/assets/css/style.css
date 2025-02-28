@@ -478,3 +478,7 @@ input:focus, textarea:focus, select:focus {
 .dropdown li a{
     font-size: 13px !important;
 }
+.dropdown li a:hover{
+    color: var(--pink) !important;
+    background-color: transparent;
+}
