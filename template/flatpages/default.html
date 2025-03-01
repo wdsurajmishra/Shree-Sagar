@@ -10,6 +10,9 @@
     span{
         color: var(--black) !important;
     }
+    .content li{
+        list-style-type: disc !important;
+    }
 </style>
 {% endblock css %}
     
@@ -19,7 +22,7 @@
         <div class="row justify-content-center py-5">
             <div class="col-md-8">
                 <h1>{{ flatpage.title }}</h1>
-                <p>{{ flatpage.content }}</p>
+                <p class="content">{{ flatpage.content }}</p>
             </div>
         </div>
     </div>
