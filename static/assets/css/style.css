@@ -24,13 +24,16 @@ body {
 * {
     margin: 0;
     padding: 0;
-    list-style-type: none;
+    /* list-style-type: none; */
     text-decoration: none !important;
     box-sizing: border-box;
     font-family: "Poppins", serif;
     /* font-family: "Cardo", serif; */
-
     
+}
+
+nav li{
+    list-style: none;
 }
 @font-face {
     font-family: 'Amargo';
@@ -79,6 +82,7 @@ nav{
     /* background-color: rgba(255, 255, 255, .4); */
     backdrop-filter: blur(15px);
 }
+
 .navb{
     border-bottom: 1px solid var(--pink);
 }

@@ -24,13 +24,15 @@ body {
 * {
     margin: 0;
     padding: 0;
-    list-style-type: none;
     text-decoration: none !important;
     box-sizing: border-box;
     font-family: "Poppins", serif;
     /* font-family: "Cardo", serif; */
-
     
+}
+
+nav li{
+    list-style: none;
 }
 @font-face {
     font-family: 'Amargo';
