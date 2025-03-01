@@ -479,3 +479,22 @@ input:focus, textarea:focus, select:focus {
     color: var(--pink) !important;
     background: transparent !important;
 }
+.brand a:hover{
+    text-decoration: none !important;
+}
+.brand a:hover::after{
+    width: 0;
+}
+.nav-link:hover{
+    color: var(--pink) !important;
+}
+
+.accordion-button:focus{
+    background: var(--pink) !important;
+    color: var(--bg) !important;
+    box-shadow: none;
+}
+.accordion-button:not(.collapsed){
+    background: var(--pink) !important;
+    color: var(--bg) !important;
+}
