@@ -131,6 +131,7 @@ nav li .custom-dropdown-menu{
 .c-c:hover{
     background-color: var(--pink);
     border-color: var(--pink);
+    color: var(--bg);
 }
 
 .show-dropdown{
@@ -488,6 +489,23 @@ input:focus, textarea:focus, select:focus {
 .nav-link:hover{
     color: var(--pink) !important;
 }
+.accordion-button{
+    background-color: #fff8f8;
+}
+
+.accordion-button::after {
+    color: var(--pink);
+}
+.accordion-button:focus::after {
+    color: var(--white);
+    filter: invert(1) brightness(1000%);
+}
+
+.accordion-button:not(.collapsed)::after {
+    color: var(--white);
+    filter: invert(1) brightness(1000%);
+}
+
 
 .accordion-button:focus{
     background: var(--pink) !important;
