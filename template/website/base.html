@@ -257,12 +257,36 @@
                     src="{% static './assets/images/icons/close.svg' %}" class="white-img" width="15px" alt=""></button>
         </div>
         <div class="offcanvas-body d-flex flex-column justify-content-between">
-            <nav>
-                <li><a href="{% url 'shop' %}">Shop All</a></li>
+            <nav class="d-flex flex-column gap-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Shop All
+                    </a>
+                    <ul class="dropdown-menu w-100">                        
+                        {% for category in categories_data %}
+                        <li><h6 class="dropdown-header text-dark text-uppercase">{{ category.category }}</h6></li>
+                        
+                        {% for subcategory in category.subcategories %}
+                    
+                        <li><a class="dropdown-item" href="{% url 'shop' %}?category={{ subcategory.category.id }}&subcategory={{ subcategory.id }}"><small>{{ subcategory.name }}</small></a></li>
+
+                                {% endfor %}
+                        {% endfor %}
+                    </ul>
+                  </li>
+        
                 <li><a href="{% url 'categories' %}">Categories</a></li>
                 <li><a href="{% url 'bestseller' %}">Bestseller</a></li>
-                <li><a href="{% url 'our-story' %}">Our Story</a></li>
-                <li><a href="{% url 'history' %}">History</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      About Us
+                    </a>
+                    <ul class="dropdown-menu w-100">
+                      <li><a class="dropdown-item" href="{% url 'our-story' %}">Our Story</a></li>
+                      <li><a class="dropdown-item" href="{% url 'history' %}">History</a></li>
+                    </ul>
+                  </li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
             </nav>
             <button class="btn btn-dark d-flex align-items-center gap-2 w-100 px-2 py-3" data-bs-toggle="offcanvas" data-bs-target="#myAccount"><i class="ti ti-user"></i>
                 My Account</button>
