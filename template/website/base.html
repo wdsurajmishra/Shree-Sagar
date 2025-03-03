@@ -50,7 +50,7 @@
                                 
                                 {% for category in categories_data %}
                                     <div class="col-md-6 col-lg-4 col-12">
-                                        <h6>{{ category.category }}</h6>
+                                        <h6 class="fw-semibold">{{ category.category }}</h6>
                                         <div class="mb-2"></div>
                                         {% for subcategory in category.subcategories %}
                                             <a href="{% url 'shop' %}?category={{ subcategory.category.id }}&subcategory={{ subcategory.id }}" class="pt-1"><small>{{ subcategory.name }}</small></a> <br>
@@ -182,10 +182,10 @@
     <!--=========================== CONTENT  ===========================-->
 
     <!--=========================== FIXED BUTTONs  ===========================-->
-    <button class="review-btn-fixed btn btn-dark rounded-0 shadow px-4 py-2 rounded-end-4" type="button"
+    <!-- <button class="review-btn-fixed btn btn-dark rounded-0 shadow px-4 py-2 rounded-end-4" type="button"
         data-bs-target="#reviews" data-bs-toggle="offcanvas">
         Reviews
-    </button>
+    </button> -->
 
     <!--=========================== REWVIEW  ===========================-->
     <div class="offcanvas offcanvas-bottom h-75 rounded-top-3" tabindex="-1" id="reviews"
@@ -301,25 +301,25 @@
             <div class="col-md-3">
                 <img src="{% static './assets/images/ss_logo.png' %}" width="100px" alt="">
                 <div class="mb-2"></div>
-                <small class="text-dark">Karur Vysya Bank, D35/223, Jangambari, Laxman Pura, Varanasi,
+                <small class="text-dark">D35/223, Jangambari, Laxman Pura, Varanasi,
                     Varanasi, Uttar Pradesh, 221001</small>
             </div>
             <div class="col-md-3">
-                <h6>Quick Links</h6>
+                <h6 class="fw-semibold">Quick Links</h6>
                 <li><a href="{% url 'shop' %}">Shop All</a></li>
                 <li><a href="{% url 'categories' %}">Categories</a></li>
                 <li><a href="{% url 'bestseller' %}">Bestseller</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
             </div>
             <div class="col-md-3">
-                <h6>Support</h6>
+                <h6 class="fw-semibold">Support</h6>
                 <li><a href="{% url 'faq' %}">FAQs</a></li>
                 <li><a href="/page/privacy-policy/">Privacy Policy</a></li>
                 <li><a href="/page/term-and-conditions/">Terms & Conditions</a></li>
                 <li><a href="/page/return-and-refund-policy/">Return & Refund Policy</a></li>
             </div>
             <div class="col-md-3">
-                <h6>Follow Us</h6>
+                <h6 class="fw-semibold">Follow Us</h6>
                 <li><a href="#"><i class="ti ti-brand-facebook-filled"></i> Facebook</a></li>
                 <li><a href="https://www.instagram.com/ss_silkestates" target="_blank"><i class="ti ti-brand-instagram"></i> Instagram</a></li>
                 <li><a href="#"><i class="ti ti-brand-youtube"></i> Youtube</a></li>

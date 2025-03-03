@@ -58,9 +58,12 @@ def shop(request):
         min_price, max_price = map(int, price_range.split('-'))
         products = products.filter(variants__price__gte=min_price, variants__price__lte=max_price)
 
+    subcategories = Subcategory.objects.all().order_by('-created_at')
+    if category_id:
+        subcategories = subcategories.filter(category_id=category_id)
     context = {
         'categories': Category.objects.all().order_by('-created_at'),
-        'subcategories': Subcategory.objects.all().order_by('-created_at'),
+        'subcategories': subcategories,
         'colors': Color.objects.all(),
         'products': products,
     }

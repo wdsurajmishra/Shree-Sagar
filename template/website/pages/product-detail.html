@@ -141,21 +141,29 @@
             </div>
             <div class="mb-4"></div>
             {% if request.GET.variant %}
-            <button class="btn py-3 px-5 btn-dark" id="addToCart">Add To Cart</button>
+            <div class="d-flex gap-2 align-items-center">
+                <button class="btn py-3 px-5 btn-dark" id="addToCart">Add To Cart</button>
+                {% if product.seller_pdf %}
+                <a href="{{product.seller_pdf.url}}" target="_blank" class="btn btn-outline-dark py-3 px-5 mt-2">PDF
+                    Catlog</a>
+                {% endif %}
+            </div>
+
             {% else %}
 
-            <button class="btn py-3 px-5 btn-dark" data-bs-container="body" data-bs-toggle="popover"
-                data-bs-placement="top" data-bs-content="Please Select A Color">Add To Cart</button>
+            <div class="d-flex gap-2 align-items-center">
+                <button class="btn py-3 px-5 btn-dark" data-bs-container="body" data-bs-toggle="popover"
+                    data-bs-placement="top" data-bs-content="Please Select A Color">Add To Cart</button>
+                {% if product.seller_pdf %}
+                <a href="{{product.seller_pdf.url}}" target="_blank" class="btn btn-outline-dark py-3 px-5 mt-2">PDF
+                    Catlog</a>
+                {% endif %}
+            </div>
             {% endif %}
             <br>
             <br>
             <a href="https://wa.me/?text={{ request.build_absolute_uri }}" target="_blank"
                 class="btn btn-outline-dark py-2 px-3">Consult our stylist</a>
-
-            {% if product.seller_pdf %}
-            <a href="{{product.seller_pdf.url}}" target="_blank" class="btn btn-outline-dark py-3 px-5 mt-2">PDF
-                Catlog</a>
-            {% endif %}
 
         </div>
     </div>
@@ -167,7 +175,9 @@
                 <div class="swiper-slide ">
                     <div class="bg-white p-2 shadow rounded">
 
-                        <img src="/media/category_thumbnails/WhatsAppImage2024-09-04at1.35.58PM_1.webp" style="width: 284px; height: 230px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <img src="/media/category_thumbnails/WhatsAppImage2024-09-04at1.35.58PM_1.webp"
+                            style="width: 284px; height: 230px; object-fit: cover; object-position: top center;"
+                            class="rounded w-100" />
                         <div class="d-flex gap-2 pt-2 justify-content-between">
                             <h6>Suraj Mishra</h6>
                             <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
@@ -188,7 +198,9 @@
                 <div class="swiper-slide ">
                     <div class="bg-white p-2 shadow rounded">
 
-                        <img src="/media/category_thumbnails/WhatsApp_Image_2024-10-01_at_6.11.34_PM.webp" style="width: 284px; height: 230px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <img src="/media/category_thumbnails/WhatsApp_Image_2024-10-01_at_6.11.34_PM.webp"
+                            style="width: 284px; height: 230px; object-fit: cover; object-position: top center;"
+                            class="rounded w-100" />
                         <div class="d-flex gap-2 pt-2 justify-content-between">
                             <h6>Suraj Mishra</h6>
                             <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
@@ -209,7 +221,9 @@
                 <div class="swiper-slide ">
                     <div class="bg-white p-2 shadow rounded">
 
-                        <img src="/media/product_images/WhatsApp_Image_2024-10-01_at_6.09.10_PM.webp" style="width: 284px; height: 230px; object-fit: cover; object-position: top center;" class="rounded w-100" />
+                        <img src="/media/product_images/WhatsApp_Image_2024-10-01_at_6.09.10_PM.webp"
+                            style="width: 284px; height: 230px; object-fit: cover; object-position: top center;"
+                            class="rounded w-100" />
                         <div class="d-flex gap-2 pt-2 justify-content-between">
                             <h6>Suraj Mishra</h6>
                             <img src="{% static 'assets/images/icons/verified.png' %}" class="align-self-top"
@@ -227,8 +241,8 @@
                         <div class="mb-2"></div>
                     </div>
                 </div>
-              
-               
+
+
             </div>
 
         </div>
@@ -275,6 +289,6 @@
             el: ".swiper-pagination",
             clickable: true,
         },
-        });
+    });
 </script>
 {% endblock content %}
