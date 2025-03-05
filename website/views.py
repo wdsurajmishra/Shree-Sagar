@@ -460,7 +460,10 @@ def paymentHandler(request, id):
                 order.shipping_charge = delivery_charge
                 order.save()
 
-                return redirect('order-placed')
+                # Clear the cart after successful payment
+                request.session['cart'] = {}
+
+                return redirect('order-detail', id=order.order_id)
 
             except razorpay.errors.SignatureVerificationError as e:
                 print(f"❌ Signature Verification Failed: {str(e)}")
