@@ -41,44 +41,48 @@
     </div>
     <!--=========================== TOPBAR  ===========================-->
     <!--=========================== NAVBAR  ===========================-->
-    <nav class="d-flex justify-content-between align-items-center py-3 container-fluid sticky-top navb">  
+    <nav class="d-flex justify-content-between align-items-center py-3 container-fluid sticky-top navb">
         <div class="links col-md-4 d-none d-md-flex">
             <li><a href="#" id="shopall" class="{% block shopactive %}{% endblock shopactive %}">Shop All</a>
                 <div class="custom-dropdown-menu" id="shopall-dropdown">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="row">
-                                
+
                                 {% for category in categories_data %}
-                                    <div class="col-md-6 col-lg-4 col-12">
-                                        <h6 class="fw-semibold">{{ category.category }}</h6>
-                                        <div class="mb-2"></div>
-                                        {% for subcategory in category.subcategories %}
-                                            <a href="{% url 'shop' %}?category={{ subcategory.category.id }}&subcategory={{ subcategory.id }}" class="pt-1"><small>{{ subcategory.name }}</small></a> <br>
-                                        {% endfor %}
-                                    </div>
+                                <div class="col-md-6 col-lg-4 col-12">
+                                    <h6 class="fw-semibold">{{ category.category }}</h6>
+                                    <div class="mb-2"></div>
+                                    {% for subcategory in category.subcategories %}
+                                    <a href="{% url 'shop' %}?category={{ subcategory.category.id }}&subcategory={{ subcategory.id }}"
+                                        class="pt-1"><small>{{ subcategory.name }}</small></a> <br>
+                                    {% endfor %}
+                                </div>
                                 {% endfor %}
-                                    
+
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="row g-5">
                                 <div class="col-md-6">
-                                    <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599" class="w-100 rounded" alt="">
+                                    <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599"
+                                        class="w-100 rounded" alt="">
                                 </div>
                                 <div class="col-md-6">
-                                    <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599" class="w-100 rounded alt="">
+                                    <img src="https://www.chinayabanaras.com/cdn/shop/files/CSR-1189_1_-LOW-ChinayaBanaras_370x230@2x.jpg?v=1709126599"
+                                        class="w-100 rounded alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
-            <li><a href="{% url 'categories' %}" class="
+            <li><a href=" {% url 'categories' %}" class="
             {% block categoriesactive %}
                 
             {% endblock categoriesactive %}
-                ">Categories</a></li>
+                ">Categories</a>
+            </li>
             <li><a href="{% url 'bestseller' %}" class="
             {% block bestselleractive %}
                 
@@ -86,7 +90,7 @@
                 ">Bestseller</a></li>
         </div>
         <div class="brand col-6 col-md-4 text-start text-md-center">
-            <a href="/"><img src="{% static 'assets/images/logo.png' %}" width="120px"  alt=""></a>
+            <a href="/"><img src="{% static 'assets/images/logo.png' %}" width="120px" alt=""></a>
         </div>
         <div class="icons d-flex gap-3 align-items-center col-md-4 justify-content-end">
             <li class="nav-item dropdown d-md-block d-none">
@@ -106,7 +110,8 @@
                         " href="{% url 'history' %}">History</a></li>
                 </ul>
             </li>
-            <li class="d-md-block d-none contact"><a href="{% url 'contact' %}" class="{% block contactactive %}{% endblock contactactive %}">Contact Us</a></li>
+            <li class="d-md-block d-none contact"><a href="{% url 'contact' %}"
+                    class="{% block contactactive %}{% endblock contactactive %}">Contact Us</a></li>
             <button class="icon-box" data-bs-toggle="offcanvas" data-bs-target="#searchCanvas">
                 <img src="{% static './assets/images/icons/search.svg' %}" class="white-img" alt="search shree sagar">
             </button>
@@ -143,8 +148,9 @@
             <nav class="d-flex flex-column gap-3">
                 <li><a href="{% url 'user-profile' %}" class="fs-4"><i class="ti ti-user-filled"></i> My Profile</a>
                 </li>
-                <li><a href="{% url 'user-addresses' %}" class="fs-4"><i class="ti ti-map-pin-filled"></i> Addresses</a></li>
-                <li><a href="#" class="fs-4"><i class="ti ti-brand-codesandbox"></i> Orders</a></li>
+                <li><a href="{% url 'user-addresses' %}" class="fs-4"><i class="ti ti-map-pin-filled"></i> Addresses</a>
+                </li>
+                <li><a href="{% url 'user-orders' %}" class="fs-4"><i class="ti ti-brand-codesandbox"></i> Orders</a></li>
                 <li><a href="{% url 'wishlist' %}" class="fs-4"><i class="ti ti-heart-filled"></i> Wishlist</a></li>
             </nav>
 
@@ -162,17 +168,18 @@
     <!--=========================== ALERT  ===========================-->
     <div class="container-fluid">
         {% if messages %}
-            {% for message in messages %}
-            <div class="toast w-100 align-items-center text-bg-dark border-0" role="alert" aria-live="assertive"
-                aria-atomic="true">
-                <div class="d-flex justify-content-between">
+        {% for message in messages %}
+        <div class="toast w-100 align-items-center text-bg-dark border-0" role="alert" aria-live="assertive"
+            aria-atomic="true">
+            <div class="d-flex justify-content-between">
                 <div class="toast-body">
                     {{ message }}
                 </div>
-                <button class="btn"><i class="ti ti-x text-light" data-bs-dismiss="toast" aria-label="Close"></i></button>
-                </div>
+                <button class="btn"><i class="ti ti-x text-light" data-bs-dismiss="toast"
+                        aria-label="Close"></i></button>
             </div>
-            {% endfor %}
+        </div>
+        {% endfor %}
         {% endif %}
     </div>
     <!--=========================== ALERT  ===========================-->
@@ -243,11 +250,55 @@
                     <h6>Total</h6>
                     <h6 id="total">₹0</h6>
                 </div>
-                <button class="btn btn-dark py-3 px-4">Checkout</button>
+                <button class="btn btn-dark py-3 px-4" data-bs-target="#checkout"
+                    data-bs-toggle="offcanvas">Checkout</button>
             </div>
         </div>
     </div>
     <!--=========================== CART  ===========================-->
+    <!--=========================== ADDRESSES  ===========================-->
+    <div class="offcanvas offcanvas-end rounded-start-3" tabindex="-1" id="checkout"
+        aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header d-flex justify-content-between align-items-center">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Select <span>Address</span></h5>
+            <button type="button" class="icon-box close-icon" data-bs-dismiss="offcanvas" aria-label="Close"><img
+                    src="{% static './assets/images/icons/close.svg' %}" class="white-img" width="15px" alt=""></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+            <div id="items" class="h-75 overflow-y-scroll d-flex flex-column gap-2">
+                
+                
+                {% if addresses %}
+                <form action="{% url 'checkout' %}" method="post">
+                    {% csrf_token %}
+                   {% for address in addresses %}
+                   <div class="form-check d-flex align-items-center border p-2 rounded mb-3">
+                       <div class="col-2 d-flex justify-content-center align-items-center">
+                           <input class="form-check-input me-2" style="width: 20px; height: 20px; vertical-align: middle;" type="radio" name="address" id="address{{ address.id }}" value="{{ address.id }}">
+                       </div>
+                       <label class="form-check-label col-10" for="address{{ address.id }}">
+                           <small>{{ address }}</small>
+                       </label>
+                   </div>
+                   
+                   
+                   {% endfor %}
+                   
+                   
+                   <button class="btn btn-dark py-3 px-4">Checkout</button>
+                </form>
+                {% else %}
+                <p>Please Add Address</p>
+                   <a href="{% url 'user-addresses' %}" class="btn btn-dark py-3 px-4">Add New Address</a>
+                {% endif %}
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+             
+                
+            </div>
+        </div>
+    </div>
+    <!--=========================== ADDRESSES  ===========================-->
 
     <!--=========================== CART  ===========================-->
     <div class="offcanvas offcanvas-end rounded-start-3" tabindex="-1" id="menu"
@@ -261,35 +312,40 @@
             <nav class="d-flex flex-column gap-3">
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Shop All
+                        Shop All
                     </a>
-                    <ul class="dropdown-menu w-100">                        
+                    <ul class="dropdown-menu w-100">
                         {% for category in categories_data %}
-                        <li><h6 class="dropdown-header text-dark text-uppercase">{{ category.category }}</h6></li>
-                        
-                        {% for subcategory in category.subcategories %}
-                    
-                        <li><a class="dropdown-item" href="{% url 'shop' %}?category={{ subcategory.category.id }}&subcategory={{ subcategory.id }}"><small>{{ subcategory.name }}</small></a></li>
+                        <li>
+                            <h6 class="dropdown-header text-dark text-uppercase">{{ category.category }}</h6>
+                        </li>
 
-                                {% endfor %}
+                        {% for subcategory in category.subcategories %}
+
+                        <li><a class="dropdown-item"
+                                href="{% url 'shop' %}?category={{ subcategory.category.id }}&subcategory={{ subcategory.id }}"><small>{{
+                                    subcategory.name }}</small></a></li>
+
+                        {% endfor %}
                         {% endfor %}
                     </ul>
-                  </li>
-        
+                </li>
+
                 <li><a href="{% url 'categories' %}">Categories</a></li>
                 <li><a href="{% url 'bestseller' %}">Bestseller</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      About Us
+                        About Us
                     </a>
                     <ul class="dropdown-menu w-100">
-                      <li><a class="dropdown-item" href="{% url 'our-story' %}">Our Story</a></li>
-                      <li><a class="dropdown-item" href="{% url 'history' %}">History</a></li>
+                        <li><a class="dropdown-item" href="{% url 'our-story' %}">Our Story</a></li>
+                        <li><a class="dropdown-item" href="{% url 'history' %}">History</a></li>
                     </ul>
-                  </li>
+                </li>
                 <li><a href="{% url 'contact' %}">Contact Us</a></li>
             </nav>
-            <button class="btn btn-dark d-flex align-items-center gap-2 w-100 px-2 py-3" data-bs-toggle="offcanvas" data-bs-target="#myAccount"><i class="ti ti-user"></i>
+            <button class="btn btn-dark d-flex align-items-center gap-2 w-100 px-2 py-3" data-bs-toggle="offcanvas"
+                data-bs-target="#myAccount"><i class="ti ti-user"></i>
                 My Account</button>
         </div>
     </div>
@@ -322,7 +378,8 @@
             <div class="col-md-3">
                 <h6 class="fw-semibold">Follow Us</h6>
                 <li><a href="#"><i class="ti ti-brand-facebook-filled"></i> Facebook</a></li>
-                <li><a href="https://www.instagram.com/ss_silkestates" target="_blank"><i class="ti ti-brand-instagram"></i> Instagram</a></li>
+                <li><a href="https://www.instagram.com/ss_silkestates" target="_blank"><i
+                            class="ti ti-brand-instagram"></i> Instagram</a></li>
                 <li><a href="#"><i class="ti ti-brand-youtube"></i> Youtube</a></li>
             </div>
         </nav>

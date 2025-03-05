@@ -8,9 +8,12 @@ class CustomerForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email', 'phone','profile_picture']
 
 class ShippingAddressForm(forms.ModelForm):
+    state = forms.CharField(widget=forms.Select(attrs={'id': 'state', 'class': 'form-select', 'onchange': 'populateDistricts()'}), required=True)
+    city = forms.CharField(widget=forms.Select(attrs={'id': 'city', 'class': 'form-select', }), required=True)
+
     class Meta:
         model = ShippingAddress
-        fields = ['phone_number', 'full_name', 'address_line_1', 'address_line_2', 'city', 'state', 'country', 'postal_code', ]
+        fields = ['phone_number', 'full_name', 'address_line_1', 'address_line_2', 'state',  'city', 'country', 'postal_code']
 
 
 from django.contrib.flatpages.models import FlatPage

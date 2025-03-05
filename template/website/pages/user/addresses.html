@@ -4,6 +4,7 @@
     {{customer.first_name}} - Addresses | Shree Sagar
 {% endblock title %}
     
+{% load static %}
 
 {% block content %}
     <div class="container-fluid py-5">
@@ -32,9 +33,18 @@
             </div>
             <div class="col-md-3 p-3 rounded border">
                 <form action="{% if request.GET.update %}
-                    {% url 'user-addresses-update' request.GET.update %}
+                    {% url 'user-addresses-update' request.GET.update %} 
+                    {% else %}
+                    {% url 'user-addresses' %}
                 {% endif %}" method="post">
                     {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     {% for field in form %}
                         <div class="mb-2">
                             <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} <small class="text-danger">*</small>{% endif %}</label>
@@ -57,6 +67,8 @@
                         {% endif %}
                             
                     </button>
+
+                    
                 </form>
             </div>
         </div>
@@ -64,6 +76,7 @@
 {% endblock content %}
     
 {% block js %}
+<script src="{% static './assets/js/addresses.js' %}"></script>
     <script>
         const inputs = document.querySelectorAll('input');  
         inputs.forEach(input => {

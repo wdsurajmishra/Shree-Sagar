@@ -8,7 +8,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from .forms import CustomerForm, ShippingAddressForm, ContactForm
 from accounts.models import Customer
-from orders.models import ShippingAddress
+from orders.models import ShippingAddress, Order, OrderItem
 from django.contrib.auth import login
 from django.contrib import messages
 from django.views.decorators.cache import cache_page
@@ -17,6 +17,16 @@ from django.views.generic import CreateView
 from django import forms
 from datetime import datetime
 from accounts.models import WishList
+import razorpay
+from django.http import HttpResponseBadRequest, HttpResponse
+from django.conf import settings
+
+
+
+
+razorpay_client = razorpay.Client(
+    auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+
 
 # Create your views here.
 # @cache_page(60 * 15)
@@ -188,8 +198,10 @@ def userAddresses(request):
     if request.GET.get('update'):
         address = get_object_or_404(ShippingAddress, id=request.GET.get('update'))
         form = ShippingAddressForm(instance=address)
+        
     if request.method == 'POST':
         form = ShippingAddressForm(request.POST)
+        print(form.errors)
         if form.is_valid():
             address = form.save(commit=False)
             address.customer = customer
@@ -212,6 +224,18 @@ def updateAddress(request, address_id):
     else:
         form = ShippingAddressForm(instance=address)
     return render(request, 'website/pages/user/update_address.html', {'form': form})
+
+@login_required
+def userOrders(request):
+    customer = get_object_or_404(Customer, username=request.user)
+    orders = Order.objects.filter(user=customer)
+    return render(request, 'website/pages/orders.html', {'orders': orders})
+
+@login_required
+def orderDetail(request, id):
+    order = get_object_or_404(Order, order_id=id)
+    items = OrderItem.objects.filter(order=order)
+    return render(request, 'website/pages/order-detail.html', {'order': order, 'items': items})
 
 @login_required
 def deleteAddress(request, address_id):
@@ -315,3 +339,135 @@ def whishlist(request):
         'lists': lists,
     }
     return render(request, 'website/pages/wishlist.html', context)
+ 
+
+
+def check_address_type(address):
+    if address.city.lower() == "varansi":
+        return "local"
+    if address.state.lower() == "uttar pradesh":
+        return "regional"
+    return "national"
+    
+
+def checkout(request):
+    if request.method == "POST":
+        address_id = request.POST.get('address')
+        address = get_object_or_404(ShippingAddress, pk=address_id)
+        cart = request.session.get('cart', {})
+        total_items = sum(item['quantity'] for item in cart.values())
+        products = []
+        delivery_charge = 0
+        total = 0
+        for product_id, item in cart.items():
+            product = ProductVariant.objects.select_related('product').get(id=product_id)
+            adress_type = check_address_type(address)
+            if adress_type == "local":
+                delivery_charge += ProductShipping.objects.filter(product=product.product).first().local_shipping_cost
+            elif adress_type == "regional":
+                delivery_charge += ProductShipping.objects.filter(product=product.product).first().regional_shipping_cost
+            else:
+                delivery_charge += ProductShipping.objects.filter(product=product.product).first().national_shipping_cost
+
+            total += product.get_discounted_price() * item['quantity']
+            products.append({
+                'id': product.id,
+                'name': product.product.name,
+                'price': product.get_discounted_price(),
+                'total': product.get_discounted_price() * int(item['quantity']),
+                'quantity': item['quantity'],
+                'thumbnail': product.get_thumbnail(),
+            })
+
+
+        data = {
+            "amount": int((total + delivery_charge) * 100),
+            "currency": "INR",
+            "receipt": "receipt_#1",
+            'payment': {
+                'capture': 'automatic',
+                'capture_options': {
+                    'refund_speed': 'optimum'
+                }
+            }
+        }
+
+        order = razorpay_client.order.create(data=data)
+
+        context = {
+            'address': address,
+            'total_items': total_items,
+            'products': products,
+            'total': total + delivery_charge,
+            'delivery_charge': delivery_charge,
+            'key': settings.RAZOR_KEY_ID,
+            'order': order,
+        }
+        return render(request, 'website/pages/checkout.html', context)
+    
+import json
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse, HttpResponseBadRequest
+from django.shortcuts import render
+import razorpay
+
+
+@csrf_exempt
+def paymentHandler(request, id):
+    if request.method == "POST":
+        try:
+            data = request.POST.dict()
+            print("Received Data:", data)  # Debugging
+
+            payment_id = data.get('razorpay_payment_id')
+            razorpay_order_id = data.get('razorpay_order_id')
+            signature = data.get('razorpay_signature')
+
+            if not all([payment_id, razorpay_order_id, signature]):
+                return HttpResponseBadRequest("Missing required parameters")
+
+            # Verify the payment signature
+            params_dict = {
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            }
+
+            try:
+                razorpay_client.utility.verify_payment_signature(params_dict)
+                print("✅ Signature Verified")
+                user = Customer.objects.get(phone=request.user)
+                address = get_object_or_404(ShippingAddress, pk=id)
+                total = 0
+                delivery_charge = 0
+                # Update the order status in the database
+                order = Order.objects.create(user=user, shipping_address=address, shipping_charge=0, total_amount=0)
+
+                cart = request.session.get('cart', {})
+                for product_id, item in cart.items():
+                    product = ProductVariant.objects.select_related('product').get(id=product_id)
+                    adress_type = check_address_type(address)
+                    if adress_type == "local":
+                        delivery_charge += ProductShipping.objects.filter(product=product.product).first().local_shipping_cost
+                    elif adress_type == "regional":
+                        delivery_charge += ProductShipping.objects.filter(product=product.product).first().regional_shipping_cost
+                    else:
+                        delivery_charge += ProductShipping.objects.filter(product=product.product).first().national_shipping_cost
+                    total += product.get_discounted_price() * item['quantity']    
+                    OrderItem.objects.create(order=order, product_variant=product, quantity=item['quantity'], price=product.get_discounted_price())
+
+                order.total_amount = total + delivery_charge
+                order.shipping_charge = delivery_charge
+                order.save()
+
+                return redirect('order-placed')
+
+            except razorpay.errors.SignatureVerificationError as e:
+                print(f"❌ Signature Verification Failed: {str(e)}")
+                return HttpResponseBadRequest("Signature verification failed")
+
+        except Exception as e:
+            print(f"❌ General Error: {str(e)}")
+            return HttpResponseBadRequest("Something went wrong")
+
+    return HttpResponseBadRequest("Invalid request method")

@@ -22,6 +22,11 @@ urlpatterns = [
     path('cart/delete', views.delete_from_cart, name='delete-cart'),
     path('user/profile', views.userProfile, name='user-profile'),
     path('user/addresses', views.userAddresses, name='user-addresses'),
+    path('user/orders', views.userOrders, name='user-orders'),
+    path('user/order/<id>', views.orderDetail, name='order-detail'),
     path('user/addresses/update/<address_id>', views.updateAddress, name='user-addresses-update'),
     path('user/addresses/delete/<address_id>', views.deleteAddress, name='user-addresses-delete'),
+    path('checkout', views.checkout, name='checkout'),
+    path('payment-handler/<id>/', views.paymentHandler, name='payment-handler'),
+
 ]

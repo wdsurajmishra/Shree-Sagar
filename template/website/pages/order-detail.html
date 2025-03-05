@@ -1,0 +1,43 @@
+{% extends '../base.html' %}
+
+
+{% block title %}
+    Order Detail
+{% endblock title %}
+    
+
+{% block content %}
+    <div class="container-fluid py-5">
+        <div class="d-flex">
+            <h1>Order Detail</h1>
+            <h6 class="ms-auto">Order Date: {{order.created_at}}</h6>
+        </div>
+        <table class="table border bg-none">
+            <tr>
+                <td><small>Order Status</small></td>
+                <td><small>{{order.status|capfirst}}</small></td>
+            </tr>
+            <tr>
+                <td><small>Delivery Charges</small></td>
+                <td><small>{{order.shipping_charge}}</small></td>
+            </tr>
+            <tr>
+                <td><small>Total</small></td>
+                <td><small>{{order.total_amount}}</small></td>
+            </tr>
+        </table>
+        <div class="row">
+            {% for item in items %}
+            <div class="bg-white shadow-sm rounded p-2 col-md-4 d-flex gap-3 m-2">
+                <img src="{{item.product_variant.product.thumbnail.url}}" width="80px" alt="">
+                <div class="align-self-center">
+                    <h6>{{item.product_variant}}</h6>
+                    <p><span>Rs. {{item.product_variant.price}} x {{item.quantity}}</span></p>
+                    <a href="/product/{{item.product_variant.product.slug}}" class="btn btn-sm btn-dark">View</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+    

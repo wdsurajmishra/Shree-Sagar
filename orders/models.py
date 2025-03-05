@@ -30,7 +30,7 @@ class ShippingAddress(models.Model):
         verbose_name_plural = _('Shipping Addresses')
 
     def __str__(self):
-        return f"Shipping Address for Order #{self.postal_code} - {self.full_name}"
+        return f"{self.full_name}, {self.address_line_1}, {self.address_line_2 or ''}, {self.city}, {self.state}, {self.postal_code}, {self.country}"
 
 
 class Order(models.Model):

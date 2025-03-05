@@ -1,0 +1,75 @@
+{% extends '../base.html' %}
+
+
+{% block title %}
+Checkout
+{% endblock title %}
+
+
+
+{% block content %}
+<div class="container-fluid py-5">
+    <h1 class="text-center">
+        Checkout
+    </h1>
+    <div class="col-md-6 mx-auto py-5">
+        <p class="p-2 rounded bg-white">
+            <small>{{address}}</small>
+        </p>
+        <table class="table">
+            <thead>
+                <th>Product</th>
+                <th>Total</th>
+            </thead>
+
+            {% for product in products %}
+            <tr>
+                <td>
+                    <small class="text-muted">{{product.name}} x {{product.quantity}}</small>
+                </td>
+                <td><small class="text-muted">{{product.total}}</small></td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><small>Delivery Charge</small></td>
+                <td><small>{{ delivery_charge }}</small></td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>{{ total }}</strong></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button class="btn btn-dark px-5 py-3" id="pay-btn">Pay Now</button></td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+
+        // Enter the Key ID generated from the Dashboard
+        key: "{{ key }}",
+        amount: "{{ order.amount }}",
+        currency: "{{ order.currency }}",
+        name: "Tanabanaweaves",
+        order_id: "{{ order.id }}",
+        callback_url: "/payment-handler/{{address.pk}}/",
+        notes: {
+            address: "{{ user.address }}"
+        }
+    };
+
+    // initialise razorpay with the options.
+    var rzp1 = new Razorpay(options);
+
+    // add event listener to the payment button.
+    document.getElementById("pay-btn").onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+    };
+</script>
+{% endblock content %}

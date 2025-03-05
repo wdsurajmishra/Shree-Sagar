@@ -72,6 +72,14 @@ class PriceHistoryInline(admin.TabularInline):
     readonly_fields = ('timestamp',)  # Make 'timestamp' visible but not editable
     show_change_link = True
 
+class ProductShippingInline(admin.StackedInline):
+    '''Tabular Inline View for ProductShipping'''
+
+    model = ProductShipping
+    extra = 1
+    max_num = 1 
+
+
 class DiscountHistoryInline(admin.TabularInline):
     model = DiscountHistory
     extra = 1
@@ -132,7 +140,7 @@ class ProductAdmin(ExtraButtonsMixin, admin.ModelAdmin):
     search_fields = ('name', 'sku', 'category__name', 'subcategory__name')
     list_filter = ('category__name', 'subcategory', 'is_active')
     prepopulated_fields = {'slug': ('name',)}
-    inlines = [ProductVariantInline, ProductReviewInline, ProductFaqInline]
+    inlines = [ProductVariantInline, ProductReviewInline, ProductFaqInline, ProductShippingInline]
     list_per_page = 25
     fieldsets = (
         ('General Information', {
